@@ -8,8 +8,6 @@ import Swal from "sweetalert2";
 export default function ContentProfile(props) {
   const token = sessionStorage.getItem("token");
   const decode = jwtDecode(token);
-  const [msg, setMsg] = useState("");
-  // console.log(decode.userId);
   const queryClient = useQueryClient();
   const [data, setData] = useState({
     id: decode.userId,
@@ -29,8 +27,7 @@ export default function ContentProfile(props) {
   const postData = async () => {
     try {
       const res = await api.post("/user/update", { ...data });
-
-      return setMsg(res.data.message);
+      return res;
     } catch (error) {
       throw error;
     }
@@ -54,9 +51,9 @@ export default function ContentProfile(props) {
       queryClient.invalidateQueries(["userInfo"]);
     },
 
-    onError: () => {
+    onError: (error) => {
       Swal.close();
-      Swal.fire("Error", error.message, "error");
+      Swal.fire("Error", error, "error");
     },
   });
 

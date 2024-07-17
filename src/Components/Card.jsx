@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import picture from "../assets/Picture.jpg";
 import { Person2 } from "@mui/icons-material";
 import { Menu, MenuItem } from "@mui/material";
@@ -22,13 +22,16 @@ export default function Card(props) {
   // console.log(props.id);
 
   const [decode, setDecode] = useState({});
-  try {
-    if (token) {
-      setDecode(jwtDecode(token));
+  useEffect(() => {
+    try {
+      if (token) {
+        setDecode(jwtDecode(token));
+      }
+    } catch (error) {
+      console.log(error);
     }
-  } catch (error) {
-    console.log(error);
-  }
+  }, [token]);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -131,7 +134,7 @@ export default function Card(props) {
             <h1 className="text-[18px]">{props.nameItem}</h1>
           </a>
           <p className="text-[13px] text-[#545458]">12 April 2024</p>
-          {props.userId === decode.userId && (
+          {decode.userId && props.userId === decode.userId && (
             <div className="absolute -right-3 top-2">
               <IconButton
                 aria-label="more"
@@ -165,13 +168,16 @@ export default function Card(props) {
           )}
         </div>
         <div className="">
-          <div className="flex gap-1 items-center">
-            <Person2 color="disabled" />
-            <p className="text-[15px] capitalize">{props.user}</p>
-          </div>
-          <div className="flex gap-1 items-center mt-2">
-            <Category color="disabled" fontSize="medium" />
-            <p className="text-[15px]">{props.category}</p>
+          <div className="flex flex-col gap-1">
+            <div className="flex gap-1 items-center">
+              <Person2 color="disabled" />
+              <p className="text-[14px] capitalize">{props.user}</p>
+            </div>
+
+            <div className="flex gap-1 items-center">
+              <Category color="disabled" fontSize="medium" />
+              <p className="text-[14px]">{props.category}</p>
+            </div>
           </div>
           <p className="text-[14px] mt-4 line-clamp-3 min-h-[65px]">
             {props.descr}

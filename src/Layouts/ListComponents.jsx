@@ -19,7 +19,7 @@ export default function ListComponents() {
   const limitedData = getData.isSuccess
     ? getData.data.laporan.slice(0, 10)
     : [];
-  console.log(getData.data);
+  // console.log(getData.data);
 
   return (
     <div className="py-10">
@@ -50,13 +50,14 @@ export default function ListComponents() {
                     descr={i.description}
                     urlImg={i.urlImg}
                     isClear={i.statusClear}
+                    user={i.user}
                   />
                 </SwiperSlide>
               );
             })}
         </Swiper>
       </div>
-      <div className="w-[90%] m-auto hidden md:block">
+      <div className="w-[90%] m-auto hidden md:block xl:hidden">
         <Swiper
           slidesPerView={3}
           spaceBetween={10}
@@ -68,6 +69,7 @@ export default function ListComponents() {
         >
           {limitedData &&
             limitedData.map((i) => {
+              // console.log(i.user);
               return (
                 <SwiperSlide>
                   <Card
@@ -79,6 +81,7 @@ export default function ListComponents() {
                     descr={i.description}
                     urlImg={i.urlImg}
                     isClear={i.statusClear}
+                    user={i.user}
                   />
                 </SwiperSlide>
               );
@@ -108,6 +111,7 @@ export default function ListComponents() {
                     descr={i.description}
                     urlImg={i.urlImg}
                     isClear={i.statusClear}
+                    user={i.user}
                   />
                 </SwiperSlide>
               );
