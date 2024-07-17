@@ -8,7 +8,7 @@ export default function HomePages() {
     <>
       <Jumbotron />
       <Problem />
-      {/* <ListComponents /> */}
+      <ListComponents />
     </>
   );
 }
