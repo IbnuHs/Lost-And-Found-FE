@@ -1,13 +1,17 @@
 import { React, useState } from "react";
 import ListReports from "../Layouts/ListReports";
 import FormReports from "../Components/FormReports";
+import Swal from "sweetalert2";
 
 export default function ListPages() {
   const [showForm, setShowForm] = useState(true);
   const token = sessionStorage.getItem("token");
   function onShow() {
     if (!token) {
-      alert("Perlu Login Untuk Membuat Laporan");
+      Swal.fire({
+        text: "Harus Login Terlebih Dahulu",
+        icon: "warning",
+      });
       return;
     }
     setShowForm(!showForm);

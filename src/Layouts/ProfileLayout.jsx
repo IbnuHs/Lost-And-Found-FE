@@ -3,6 +3,9 @@ import user from "../assets/user.png";
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ChangePassword from "../Components/ChangePassword";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Swal from "sweetalert2";
+import { api } from "../lib/API";
 
 export default function ProfileLayout(props) {
   const [showForm, setShowForm] = useState(true);
@@ -14,6 +17,72 @@ export default function ProfileLayout(props) {
   function showFormPassword() {
     setShowFormPass(!showFormPass);
   }
+  console.log(props.userId);
+  const queryClient = useQueryClient();
+  const [data, setData] = useState({
+    id: props.userId,
+    userName: props.userName,
+    noHp: props.noHp,
+    noIdentity: props.numIdentity,
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    // console.log(value);
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value === "" ? props[name] : value,
+    }));
+  };
+
+  const postData = async () => {
+    try {
+      const res = await api.post("/user/update", { ...data });
+      return res;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const mutation = useMutation({
+    mutationFn: postData,
+    onMutate: () => {
+      console.log("mutate");
+      Swal.fire({
+        title: "Loading",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+    },
+
+    onSuccess: () => {
+      Swal.close();
+      Swal.fire("Success", "Profil Telah Diubah", "success");
+      show();
+      queryClient.invalidateQueries(["userInfo"]);
+    },
+
+    onError: (error) => {
+      Swal.close();
+      Swal.fire("Error", error, "error");
+    },
+  });
+  const onUpdate = (e) => {
+    e.preventDefault();
+    Swal.fire({
+      text: "Ubah Profile",
+      icon: "question",
+      showCancelButton: true,
+      cancelButtonColor: "red",
+      cancelButtonText: "Tidak",
+      confirmButtonText: "Iya",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        mutation.mutate();
+      }
+    });
+  };
 
   return (
     <div className="">
@@ -33,7 +102,7 @@ export default function ProfileLayout(props) {
             <div
               className={`text-center ${showForm ? "inline-block" : "hidden"}`}
             >
-              <h1 className="font-semibold">{props.userName}</h1>
+              <h1 className="font-semibold capitalize">{props.userName}</h1>
               <p className="font-semibold text-[14px]">{props.email}</p>
             </div>
           </div>
@@ -101,9 +170,11 @@ export default function ProfileLayout(props) {
                 Nama
               </label>
               <input
+                name="userName"
                 type="text"
+                onChange={handleChange}
                 className="outline-none px-2 font-semibold capitalize"
-                placeholder="John Doe"
+                placeholder={props.userName}
               />
             </div>
             <div className="flex flex-col border-b-2 pb-2 border-black">
@@ -111,33 +182,31 @@ export default function ProfileLayout(props) {
                 No Handphone
               </label>
               <input
+                name="noHp"
                 type="text"
+                onChange={handleChange}
                 className="outline-none px-2 font-semibold capitalize"
-                placeholder="0812 0000 0000"
+                placeholder={props.noHp}
               />
             </div>
-            <div className="flex flex-col border-b-2 pb-2 border-black">
-              <label htmlFor="email" className="text-[14px] px-2">
-                Email
-              </label>
-              <input
-                type="email"
-                className="outline-none px-2 font-semibold capitalize"
-                placeholder="JohnDoe@Gmail.com"
-              />
-            </div>
+
             <div className="flex flex-col border-b-2 pb-2 border-black">
               <label htmlFor="No Identitas" className="text-[14px] px-2">
                 No Identitas
               </label>
               <input
+                name="noIdentity"
                 type="text"
                 className="outline-none px-2 font-semibold capitalize"
-                placeholder="130XXXXXXX"
+                placeholder={props.numIdentity}
               />
             </div>
             <div className="m-auto flex gap-4 my-4">
-              <button className="bg-main-gray text-center px-8 py-1 text-white rounded-md">
+              <button
+                type="submit"
+                onClick={onUpdate}
+                className="bg-main-gray text-center px-8 py-1 text-white rounded-md"
+              >
                 Save
               </button>
               <button

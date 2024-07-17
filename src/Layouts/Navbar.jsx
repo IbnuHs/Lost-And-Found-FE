@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { AlignJustify, LogInIcon, LogOutIcon } from "lucide-react";
 import profile from "../assets/user.png";
 import { Link, useNavigate } from "react-router-dom";
-
 import { jwtDecode } from "jwt-decode";
 import { userInfo } from "../utils/getUserInfo";
 
@@ -10,7 +9,9 @@ export default function Navbar() {
   const [navToggle, setNavToggle] = useState(false);
   const [userName, setUserName] = useState("");
   const token = sessionStorage.getItem("token");
-  console.log(token !== null);
+  const navRef = useRef(null);
+  // console.log(token !== null);
+
   useEffect(() => {
     if (token !== null) {
       const decode = jwtDecode(token);
@@ -18,6 +19,16 @@ export default function Navbar() {
         setUserName(user.data.userName);
       });
     }
+    function handleClickOutside(event) {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setNavToggle(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   });
   function setToggle() {
     setNavToggle(!navToggle);
@@ -51,6 +62,7 @@ export default function Navbar() {
         <AlignJustify width={27} height={27} />
       </button>
       <div
+        ref={navRef}
         className={`${
           navToggle ? "top-14" : "-top-full"
         } font-semibold text-[14px] flex flex-col justify-center absolute right-0 left-0 items-center bg-main-gray gap-4 py-6 md:static md:flex-row md:py-0 md:text-[18px]`}
@@ -70,9 +82,9 @@ export default function Navbar() {
           <button
             type="button"
             onClick={login}
-            className="flex flex-col items-center text-[14px] md:hidden"
+            className="flex gap-2 items-center justify-center md:hidden"
           >
-            {/* <LogInIcon height={32} /> */}
+            <LogInIcon className="h-[16px] w-4" />
             Login
           </button>
         )}
@@ -95,18 +107,18 @@ export default function Navbar() {
           <button
             type="button"
             onClick={Logout}
-            className="flex flex-col items-center text-[16px]"
+            className="flex flex-col items-center text-[12px]"
           >
-            {/* <LogOutIcon height={32} /> */}
+            <LogOutIcon className="h-[16px] w-4" />
             LogOut
           </button>
         ) : (
           <button
             type="button"
             onClick={login}
-            className="flex flex-col items-center font-semibold text-[16px]"
+            className="flex flex-col items-center font-semibold text-[12px]"
           >
-            {/* <LogInIcon height={32} /> */}
+            <LogInIcon className="h-[16px] w-4" />
             Login
           </button>
         )}
