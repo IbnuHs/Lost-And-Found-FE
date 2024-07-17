@@ -3,6 +3,7 @@ import { EllipsisVertical } from "lucide-react";
 import pict from "../assets/Picture.jpg";
 import { api } from "../lib/API";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 export default function CardsAdmin(props) {
   const queryClient = useQueryClient();
@@ -19,19 +20,23 @@ export default function CardsAdmin(props) {
   };
   const mutation = useMutation({
     mutationFn: postData,
-    onSuccess: () => {
+    onSuccess: (data, variables) => {
+      console.log(data);
+      console.log(variables);
       queryClient.invalidateQueries(["adminReports", "getReports"]);
-      console.log("Berhasil");
+      Swal.fire({
+        title: "Laporan",
+        text: `Laporan Berhasil ${variables}`,
+        icon: "success",
+      });
     },
   });
 
   function onAccept() {
     mutation.mutate("DI TERIMA");
-    mutation.isSuccess(alert("berhasil diterima"));
   }
   function onReject() {
     mutation.mutate("DI TOLAK");
-    mutation.isSuccess(alert("berhasil ditolak"));
   }
   function getDateOnly(dateTimeString) {
     return new Date(dateTimeString).toISOString().split("T")[0];

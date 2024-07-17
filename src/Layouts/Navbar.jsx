@@ -10,8 +10,9 @@ export default function Navbar() {
   const [navToggle, setNavToggle] = useState(false);
   const [userName, setUserName] = useState("");
   const token = sessionStorage.getItem("token");
+  console.log(token !== null);
   useEffect(() => {
-    if (token) {
+    if (token !== null) {
       const decode = jwtDecode(token);
       userInfo(decode.userId).then((user) => {
         setUserName(user.data.userName);

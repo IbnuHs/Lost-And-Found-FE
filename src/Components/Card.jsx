@@ -13,13 +13,22 @@ import { Category } from "@mui/icons-material";
 export default function Card(props) {
   const token = sessionStorage.getItem("token");
   const [errMsg, setErrMsg] = useState("");
-  const decode = jwtDecode(token);
+  // const decode = jwtDecode(token);
   const lostCase = props.case === "Kehilangan";
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const ITEM_HEIGHT = 12;
   const queryClient = useQueryClient();
   // console.log(props.id);
+
+  const [decode, setDecode] = useState({});
+  try {
+    if (token) {
+      setDecode(jwtDecode(token));
+    }
+  } catch (error) {
+    console.log(error);
+  }
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
