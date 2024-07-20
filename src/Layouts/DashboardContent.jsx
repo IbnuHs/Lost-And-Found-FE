@@ -52,6 +52,7 @@ export default function DashboardContent() {
           </div>
         )}
         {data.isSuccess &&
+          data.data.reports &&
           data.data.reports.map((i) => {
             return (
               <CardsAdmin

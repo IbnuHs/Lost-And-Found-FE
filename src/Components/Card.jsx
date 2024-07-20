@@ -13,6 +13,7 @@ import { Category } from "@mui/icons-material";
 export default function Card(props) {
   const token = sessionStorage.getItem("token");
   const [errMsg, setErrMsg] = useState("");
+  const [role, setRole] = useState("");
   // const decode = jwtDecode(token);
   const lostCase = props.case === "Kehilangan";
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -119,9 +120,9 @@ export default function Card(props) {
         )}
         <div
           className={`${props.isClear ? "" : "hidden"}
-          bg-[#8d8e9fa0] absolute top-0 bottom-0 left-0 right-0 text-center flex justify-center items-center`}
+          bg-[#adafc3a0] absolute top-0 bottom-0 left-0 right-0 text-center flex justify-center items-center`}
         >
-          <h1 className="text-[70px] font-semibold text-[#444]">Clear</h1>
+          <h1 className="text-[70px] font-semibold text-[#666565]">Selesai</h1>
         </div>
       </div>
       {/* <DeletePrompt /> */}
@@ -133,39 +134,40 @@ export default function Card(props) {
           >
             <h1 className="text-[18px]">{props.nameItem}</h1>
           </a>
-          <p className="text-[13px] text-[#545458]">12 April 2024</p>
-          {decode.userId && props.userId === decode.userId && (
-            <div className="absolute -right-3 top-2">
-              <IconButton
-                aria-label="more"
-                id="long-button"
-                aria-controls={open ? "long-menu" : undefined}
-                aria-expanded={open ? "true" : undefined}
-                aria-haspopup="true"
-                onClick={handleClick}
-              >
-                <MoreVert />
-              </IconButton>
-              <Menu
-                id="long-menu"
-                MenuListProps={{
-                  "aria-labelledby": "long-button",
-                }}
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                property={{
-                  style: {
-                    maxHeight: ITEM_HEIGHT * 4.5,
-                    width: "80px",
-                    marginRight: "100px",
-                  },
-                }}
-              >
-                <MenuItem onClick={handlePrompt}>Delete</MenuItem>
-              </Menu>
-            </div>
-          )}
+          <p className="text-[13px] text-[#545458]">{props.date}</p>
+          {(decode.userId && props.userId === decode.userId) ||
+            (decode.role === "Admin" && (
+              <div className="absolute -right-3 top-2">
+                <IconButton
+                  aria-label="more"
+                  id="long-button"
+                  aria-controls={open ? "long-menu" : undefined}
+                  aria-expanded={open ? "true" : undefined}
+                  aria-haspopup="true"
+                  onClick={handleClick}
+                >
+                  <MoreVert />
+                </IconButton>
+                <Menu
+                  id="long-menu"
+                  MenuListProps={{
+                    "aria-labelledby": "long-button",
+                  }}
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  property={{
+                    style: {
+                      maxHeight: ITEM_HEIGHT * 4.5,
+                      width: "80px",
+                      marginRight: "100px",
+                    },
+                  }}
+                >
+                  <MenuItem onClick={handlePrompt}>Delete</MenuItem>
+                </Menu>
+              </div>
+            ))}
         </div>
         <div className="">
           <div className="flex flex-col gap-1">

@@ -5,6 +5,7 @@ import { api } from "../lib/API";
 import { jwtDecode } from "jwt-decode";
 import { useQuery } from "@tanstack/react-query";
 import { DeletePrompt } from "../features/DeletePrompt";
+import { data } from "autoprefixer";
 
 export default function UserReports() {
   const [open, setOpen] = useState(false);
@@ -39,8 +40,10 @@ export default function UserReports() {
       <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-6 justify-items-center overflow-scroll xl:justify-items-start m-auto xl:m-4">
         {getData.isLoading && <div className="">Loading .... </div>}
         {getData.isSuccess &&
+          getData.data.data &&
           getData.data.data.map((i) => {
-            // console.log(i);
+            const date = i.createdAt.slice(0, 10);
+            // console.log(i.createdAt);
             return (
               <Card
                 key={i.id}
@@ -55,6 +58,7 @@ export default function UserReports() {
                 setOpen={handleOpen}
                 userId={i.userId}
                 user={i.userName}
+                date={date}
               />
             );
           })}

@@ -11,7 +11,7 @@ export default function ListComponents() {
   const getData = useQuery({
     queryKey: ["get"],
     queryFn: async () => {
-      const res = await api.get("/laporan/");
+      const res = await api.get("/laporan", { params: { page: 1 } });
       return res.data;
     },
   });
@@ -36,6 +36,7 @@ export default function ListComponents() {
           }}
           className="mySwiper"
           modules={[Pagination]}
+          navigation={true}
         >
           {limitedData &&
             limitedData.map((i) => {
@@ -66,6 +67,7 @@ export default function ListComponents() {
           }}
           className="mySwiper"
           modules={[Pagination]}
+          navigation={true}
         >
           {limitedData &&
             limitedData.map((i) => {
@@ -97,9 +99,12 @@ export default function ListComponents() {
           }}
           className="mySwiper"
           modules={[Pagination]}
+          navigation={true}
         >
           {limitedData &&
             limitedData.map((i) => {
+              console.log(i);
+              // const date = i.createdAt.slice(0, 10);
               return (
                 <SwiperSlide>
                   <Card
@@ -112,6 +117,7 @@ export default function ListComponents() {
                     urlImg={i.urlImg}
                     isClear={i.statusClear}
                     user={i.user}
+                    // date={date}
                   />
                 </SwiperSlide>
               );

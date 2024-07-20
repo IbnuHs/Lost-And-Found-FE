@@ -12,6 +12,10 @@ import { useQuery } from "@tanstack/react-query";
 import { getRole } from "../utils/getRole";
 import { FinishedLostButton } from "../Components/FinishedLostButton";
 import FinishedFoundButton from "../Components/FinishedFoundButton";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
 export default function DetailItem() {
   const { id } = useParams();
@@ -32,7 +36,7 @@ export default function DetailItem() {
   }
   if (isSuccess && data) {
     return (
-      <div className="px-5 md:px-10 relative">
+      <div className="px-5 md:px-10 relative overflow-x-hidden">
         <a href="/listreport" className="mt-4 -ml-2 block">
           <ArrowBackIosNew />
         </a>
@@ -44,6 +48,21 @@ export default function DetailItem() {
         </h1>
         <div className="px-4 md:flex flex-row md:px-0 lg:justify-center lg:px-20  lg:gap-14 xl:gap-20">
           <div className="border border-black relative md:min-w-[450px] max-w-[350px] m-auto lg:max-w-[450px] xl:max-w-[600px]">
+            {/* <Swiper navigation={true} modules={[Navigation]}>
+              {data.data.urlImg &&
+                data.data.urlImg.map((i, index) => {
+                  return (
+                    <SwiperSlide key={index}>
+                      <img
+                        src={i}
+                        alt=""
+                        className="object-center w-full max-w-[350px] m-auto lg:mx-0 lg:max-w-[450px] xl:max-w-[600px] aspect-video object-contain"
+                      />
+                    </SwiperSlide>
+                  );
+                })}
+            </Swiper> */}
+
             <img
               src={data.data.urlImg[0] ? data.data.urlImg[0] : picture}
               alt=""
@@ -54,7 +73,7 @@ export default function DetailItem() {
                 data.data.statusClear ? "" : "hidden"
               } bg-[#8d8e9fa0] lg:max-w-[450px] xl:max-w-[600px] absolute top-0 bottom-0 left-0 right-0 text-center flex justify-center items-center`}
             >
-              <h1 className="text-[70px] font-semibold text-[#444]">Clear</h1>
+              <h1 className="text-[70px] font-semibold text-[#444]">Selesai</h1>
             </div>
           </div>
           <div className="max-w-[350px] m-auto my-7 md:max-w-[400px] md:w-[250px] lg:m-0 lg:min-w-[350px] lg:max-w-[450px] xl:min-w-[450px] xl:max-w-[550px]">
@@ -74,25 +93,25 @@ export default function DetailItem() {
               <div className="flex gap-2 items-center">
                 <Person2 color="disabled" />
                 <p className="text-main-gray text-[14px] lg:text-[16px] xl:text-[18px]">
-                  John Doe
+                  {data.data.userName}
                 </p>
               </div>
               <div className="flex gap-2 items-center">
                 <CalendarMonthRounded color="disabled" />
                 <p className="text-main-gray text-[14px] lg:text-[16px] xl:text-[18px]">
-                  14 April 2024
+                  {data.data.createdAt.slice(0, 10)}
                 </p>
               </div>
               <div className="flex gap-2 items-center">
                 <PermContactCalendar color="disabled" />
                 <p className="text-main-gray text-[14px] lg:text-[16px] xl:text-[18px]">
-                  user@emailExample.com
+                  {data.data.email}
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <div className="max-w-[350px] m-auto mb-16 md:max-w-none md:px-9 lg:px-20 xl:w-[80%] xl:px-5">
+        <div className="max-w-[350px] m-auto mb-16 md:max-w-none px-4 md:px-9 lg:px-20 xl:w-[80%] xl:px-5">
           <div className="">
             <h1 className="font-semibold my-4 lg:text-[22px] lg:mt-8 xl:text-[24px]">
               Detail :
@@ -120,6 +139,7 @@ export default function DetailItem() {
 
         {/* Button If Case Barang Ditemukan */}
         {!data.data.statusClear &&
+          data.data.statusLaporan !== "PENDING" &&
           role === "Admin" &&
           data.data.case === "Penemuan" && (
             <div className="flex flex-col items-center absolute bottom-5 right-14">
@@ -128,6 +148,7 @@ export default function DetailItem() {
           )}
         {/* Button If Case Barang Hilang */}
         {!data.data.statusClear &&
+          data.data.statusLaporan !== "PENDING" &&
           role === "Admin" &&
           data.data.case === "Kehilangan" && (
             <div className="flex flex-col items-center absolute bottom-5 right-14">

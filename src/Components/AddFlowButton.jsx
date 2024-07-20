@@ -8,7 +8,7 @@ export default function AddFlowButton({ setOnshow }) {
   //   setOpen(!open);
   // }
   return (
-    <div className="sticky pr-4 lg:pr-8 bottom-10 ">
+    <div className="sticky pr-4 lg:pr-0 right-0 bottom-10">
       <div className="flex justify-end z-10">
         <div className="flex justify-center flex-col">
           <div className="flex justify-center">
