@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import fikom from "../assets/Fikom Login.png";
-import { useDispatch, useSelector } from "react-redux";
-import { login, reset } from "../redux/AuthSlice/AuthSlice";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import roleHook from "../hook/roleHook";
+import fikom from "../assets/Fikom.png";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "../lib/API";
 import { jwtDecode } from "jwt-decode";
@@ -58,10 +55,10 @@ export default function LoginPage() {
     // dispatch(login({ email, password }));
   };
   return (
-    <div className="flex items-center min-h-screen md:px-6">
-      <div className="flex flex-row items-center border-2 m-auto shadow-md md:shadow-lg">
-        <div className="flex flex-col m-auto justify-center font-poppins shadow-md rounded-sm px-6 py-14 md:flex-grow md:shadow-none md:px-12">
-          <h1 className="font-semibold font-poppins text-[24px] text-center md:text-[26px] lg:text-[28px]">
+    <div className="flex items-center justify-center min-h-screen md:px-8">
+      <div className="flex flex-row max-w-[800px] items-center  border-2 box-content">
+        <div className="m-auto font-poppins min-w-80 px-6 shadow-md rounded-sm py-16 md:shadow-none flex-grow">
+          <h1 className="font-semibold font-poppins text-[24px] text-center md:text-[20px] lg:text-[24px]">
             Masuk
           </h1>
           {error && (
@@ -73,13 +70,10 @@ export default function LoginPage() {
           <form
             action=""
             onSubmit={handleSubmit}
-            className="flex flex-col gap-5 mt-5 lg:px-4"
+            className="flex flex-col gap-5 w-full mt-5 max-w-80 px-2 m-auto"
           >
             <div className="flex flex-col gap-[5px]">
-              <label
-                htmlFor="Email"
-                className="text-[15px] md:text-[16px] lg:text-[18px]"
-              >
+              <label htmlFor="Email" className="text-[14px] md:text-[16px]">
                 Email
               </label>
               <input
@@ -87,14 +81,12 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Masukkan Email Anda"
-                className="border-[#989898] focus:outline-none border shadow-md text-[14px] px-2 py-2 rounded-md md:py-3 lg:px-4 lg:text-[16px]"
+                className="border-[#989898] focus:outline-none border shadow-md text-[12px] px-2 py-2 rounded-md md:py-3 lg:px-4 lg:text-[14px] "
+                required
               />
             </div>
             <div className="flex flex-col gap-[5px]">
-              <label
-                htmlFor="Password"
-                className="text-[15px] md:text-[16px] lg:text-[18px]"
-              >
+              <label htmlFor="Password" className="text-[14px] md:text-[16px]">
                 Password
               </label>
               <input
@@ -102,16 +94,17 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Masukkan Password"
-                className="border-[#989898] focus:outline-none border shadow-md text-[14px] px-2 py-2 rounded-md md:py-3 lg:px-4 lg:text-[16px]"
+                className="border-[#989898] focus:outline-none border shadow-md text-[14px] px-2 py-2 rounded-md md:py-3 lg:px-4 lg:text-[14px]"
+                required
               />
             </div>
             <div className="flex flex-col justify-center mt-5">
               <div className="m-auto">
                 <button
                   type="submit"
-                  className="bg-main-gray text-center text-white rounded-md px-8 py-[6px] flex items-center justify-center text-[14px] lg:text-[16px] md:py-[10px] md:px-12"
+                  className="bg-main-gray text-center text-white rounded-md px-8 py-[6px] flex items-center justify-center text-[14px] lg:text-[14px] md:py-[10px] md:px-10"
                 >
-                  {loading ? <CircularProgress size={21} /> : "Masuk"}
+                  {loading ? <CircularProgress size={16} /> : "Masuk"}
                 </button>
               </div>
               <p className="text-[10px] text-center mt-2 md:text-[12px]">
@@ -123,8 +116,8 @@ export default function LoginPage() {
             </div>
           </form>
         </div>
-        <div className="hidden md:inline-block max-w-[45%] min-h-full w-auto h-full flex-grow">
-          <img src={fikom} alt="" className=" h-full object-center flex-grow" />
+        <div className="hidden md:inline-block max-w-[48%] min-h-full w-auto h-full flex-grow">
+          <img src={fikom} alt="" className=" w-full flex-grow" />
         </div>
       </div>
     </div>

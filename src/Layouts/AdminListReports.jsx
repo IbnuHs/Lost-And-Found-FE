@@ -1,25 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SearchIcon, FilterIcon, Play, LayoutList } from "lucide-react";
 import { useState } from "react";
 import Card from "../Components/Card";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../lib/API";
-import { CircularProgress, Box } from "@mui/material";
+import { CircularProgress, Box, Stack, Pagination } from "@mui/material";
 
 export default function AdminListReports() {
   const [filterDrop, setFilterDrop] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
   function dropDown() {
     setFilterDrop(!filterDrop);
   }
 
-  const { data, isLoading, isSuccess, isError } = useQuery({
+  const { data, isLoading, isSuccess, isError, refetch } = useQuery({
     queryKey: ["adminReports"],
     queryFn: async () => {
-      const res = await api.get("/laporan/allReports");
-      console.log(res.data);
-      return res.data;
+      try {
+        const res = await api.get("/laporan/allReports", {
+          params: { page: currentPage },
+        });
+        return res.data;
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
+  useEffect(() => {
+    console.log(currentPage);
+    refetch();
+    console.log(data);
+  }, [currentPage, data]);
+  const handlePageChange = async (event, value) => {
+    setCurrentPage(value);
+  };
   return (
     <div className="border-2 border-pink-900 flex-grow px-4">
       <div className="flex justify-center border-b-[3px] border-[#5C5F62] items-center gap-5 py-4">
@@ -180,7 +194,7 @@ export default function AdminListReports() {
         </div>
       </div>
       <div className="">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 mt-6 justify-items-center xl:justify-items-start m-auto xl:m-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-6 justify-items-center xl:justify-items-start m-auto xl:m-4">
           {isLoading && (
             <div className="col-span-1 flex justify-center lg:col-span-2 xl:col-span-3">
               <Box sx={{ display: "flex" }}>
@@ -189,7 +203,10 @@ export default function AdminListReports() {
             </div>
           )}
           {isSuccess &&
+            data.data &&
             data.data.map((i) => {
+              const date = i.createdAt.slice(0, 10);
+              // console.log(date);
               return (
                 <Card
                   key={i.id}
@@ -198,11 +215,27 @@ export default function AdminListReports() {
                   case={i.case}
                   category={i.category}
                   descr={i.description}
+                  isClear={i.statusClear}
                   urlImg={i.urlImg}
+                  user={i.user.userName}
+                  date={date}
                 />
               );
             })}
         </div>
+        {data?.data && (
+          <div className="m-auto flex items-center justify-center my-12">
+            <Stack>
+              <Pagination
+                onChange={handlePageChange}
+                count={Math.ceil(data.pagination.total / data.pagination.limit)}
+                page={currentPage}
+                variant="outlined"
+                shape="rounded"
+              />
+            </Stack>
+          </div>
+        )}
       </div>
     </div>
   );

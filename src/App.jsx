@@ -34,7 +34,7 @@ function App() {
         {isLoginPage || isRegisterPage ? null : <Navbar />}
         {/* <Navbar /> */}
 
-        <main className="flex-grow ">
+        <main className="">
           <Routes>
             <Route path="/" element={<HomePages />} />
             <Route path="/listreport" element={<ListPages />} />

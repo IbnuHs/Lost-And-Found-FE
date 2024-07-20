@@ -1,13 +1,26 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import image from "../assets/missing.png";
 import { Play, Upload } from "lucide-react";
 import { api } from "../lib/API";
 import defaultImage from "../assets/Picture.jpg";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { jwtDecode } from "jwt-decode";
+import { userInfo } from "../utils/getUserInfo";
 
 export default function FormReports({ setShowForm, showform, funcOnShow }) {
   const queryClient = useQueryClient();
+  const [userId, setUserID] = useState("");
+  const token = sessionStorage.getItem("token");
+  useEffect(() => {
+    if (token) {
+      const decode = jwtDecode(token);
+      userInfo(decode.userId).then((user) => {
+        // console.log(user.data.id);
+        setUserID(user.data.id);
+      });
+    }
+  });
   const postData = async (formData) => {
     const config = {
       headers: {
@@ -42,6 +55,7 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
         "success"
       );
       queryClient.invalidateQueries(["getReports"]);
+      setShowForm(true);
     },
     onError: (error) => {
       console.log(error);
@@ -53,7 +67,7 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
   const inputRef = useRef(null);
   const [nameItem, setNameItem] = useState("");
   const [desc, setDesc] = useState("");
-  const [date, setDate] = useState("");
+  // const [date, setDate] = useState("");
   const [category, setCategory] = useState("");
   const [cases, setCases] = useState("");
   const [images, setImage] = useState(defaultImage);
@@ -64,11 +78,11 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
       setImage(file);
     }
   };
-  const handleClickImg = () => {
-    if (inputRef.current) {
-      inputRef.current.click();
-    }
-  };
+  // const handleClickImg = () => {
+  //   if (inputRef.current) {
+  //     inputRef.current.click();
+  //   }
+  // };
 
   function onSubmit(e) {
     e.preventDefault();
@@ -80,9 +94,8 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
       data.append("category", category);
       data.append("desc", desc);
       data.append("items", images);
-      data.append("userId", "UID9f63cf73ba26433");
+      data.append("userId", userId);
       mutation.mutate(data);
-      mutation.isSuccess(setShowForm(true));
     } catch (error) {
       console.log(error);
     }
@@ -91,10 +104,10 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
     <div
       className={`${
         showform ? "hidden" : "inline-block"
-      } fixed left-0 min-h-[500px] border right-0 top-0 bottom-0 z-20 py-20 px-4 backdrop-blur items-center overflow-scroll`}
+      } fixed left-0 min-h-[400px] border right-0 top-0 bottom-0 z-20 py-16 px-4 backdrop-blur items-center overflow-scroll`}
     >
       <div className="flex border-2 border-black max-w-[750px] bg-white m-auto font-source-sans3 rounded-xl overflow-hidden">
-        <div className="hidden md:flex max-w-[45%] bg-[#8C8C8C] px-6 flex-col py-36">
+        <div className="hidden md:flex max-w-[45%] bg-[#8C8C8C] px-6 flex-col py-24">
           <div className="flex flex-col gap-4">
             <img src={image} alt="" className="max-w-[300px] m-auto" />
             <p className="text-white text-[15px]">
@@ -111,7 +124,7 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
         <form
           action=""
           onSubmit={onSubmit}
-          className="flex-grow px-6 py-14 flex flex-col gap-3"
+          className="flex-grow px-6 py-10 flex flex-col gap-3"
         >
           <div className="flex flex-col gap-2">
             <label htmlFor="namaItem" className="font-semibold">
@@ -125,7 +138,7 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
               className="border-[#808080] border-[2px] rounded-md px-3 py-[5px] focus:outline-none text-[14px]"
             />
           </div>
-          <div className="flex flex-col gap-2">
+          {/* <div className="flex flex-col gap-2">
             <label htmlFor="tanggal" className="font-semibold">
               Tanggal
             </label>
@@ -135,7 +148,7 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
               onChange={(e) => setDate(e.target.value)}
               className="border-[#808080] text-[#808080] border-[2px] rounded-md px-3 py-[5px] focus:outline-none text-[14px]"
             />
-          </div>
+          </div> */}
           <div className="flex flex-col gap-2 relative">
             <label htmlFor="jenis laporan" className="font-semibold">
               Jenis Laporan
@@ -143,10 +156,11 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
             <select
               name="jenis laporan"
               id=""
+              defaultValue=""
               onChange={(e) => setCases(e.target.value)}
               className="px-3 py-[5px] border-[#989898] border-[2px] rounded-md text-[#939393] text-[14px] bg-transparent flex items-center shadow-lg appearance-none w-full z-20 cursor-pointer lg:px-4 md:text-[16px] lg:text-[14px] font-semibold"
             >
-              <option disabled selected>
+              <option value="" disabled>
                 Jenis Laporan
               </option>
               <option value="Kehilangan">Kehilangan</option>
@@ -166,10 +180,11 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
             <select
               name="kategori karang"
               id=""
+              defaultValue=""
               onChange={(e) => setCategory(e.target.value)}
               className="px-3 py-[5px] border-[#989898] border-[2px] rounded-md text-[#939393] text-[14px] bg-transparent flex items-center shadow-lg appearance-none w-full z-20 cursor-pointer lg:px-4 md:text-[16px] lg:text-[14px] font-semibold"
             >
-              <option disabled selected>
+              <option value="" disabled>
                 Jenis Barang
               </option>
               <option value="Kartu Identitas">Kartu Identitas</option>
@@ -204,7 +219,16 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
               Gambar Barang
             </label>
             <div className="">
-              <div className="border-2 border-[#989898] text-main-gray hover:bg-[#d1d0d0] text-sm rounded-lg h-28 w-full  flex relative">
+              <input
+                onChange={onChange}
+                ref={inputRef}
+                className="block w-full mb-2 text-xs font-semibold text-gray-900 border-[#989898] border-[2px]  rounded-lg cursor-pointer bg-gray-50  focus:outline-none "
+                id="small_size"
+                // multiple="multiple"
+                type="file"
+              />
+
+              {/* <div className="border-2 border-[#989898] text-main-gray hover:bg-[#d1d0d0] text-sm rounded-lg h-28 w-full  flex relative">
                 <input
                   type="file"
                   id="Name"
@@ -215,13 +239,7 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
                   placeholder="input"
                 />
                 <div className="absolute top-0 left-0 right-0 bottom-0 px-3 py-3 -z-0">
-                  {/* <img
-                    src={bgImage}
-                    className={`${
-                      !bgImage ? "hidden" : "inline-block"
-                    } w-full h-full object-contain`}
-                    alt=""
-                  /> */}
+                  <h1>tes</h1>
                 </div>
                 <button
                   type="button"
@@ -229,10 +247,10 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
                   onClick={handleClickImg}
                 >
                   <Upload className="" />
-                  {/* <i className="bx bx-upload text-[50px]"></i> */}
+                
                   <span className="font-semibold">Upload</span>
                 </button>
-              </div>
+              </div> */}
               <p className="text-[10px] text-red-600 font-semibold">
                 *Jika anda memiliki gambar barang anda yang hilang bisa
                 dimasukkan atau bisa mengambil referensi dari internet (boleh

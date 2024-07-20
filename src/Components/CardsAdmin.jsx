@@ -4,6 +4,7 @@ import pict from "../assets/Picture.jpg";
 import { api } from "../lib/API";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 export default function CardsAdmin(props) {
   const queryClient = useQueryClient();
@@ -59,9 +60,12 @@ export default function CardsAdmin(props) {
         />
       </div> */}
       <div className="">
-        <a href="" className="font-bold text-[16px] underline">
+        <Link
+          to={`/laporan/detail/${props.id}`}
+          className="font-bold text-[16px] underline"
+        >
           {props.nameItem}
-        </a>
+        </Link>
         <p className="line-clamp-3 text-[11px]">{props.desc} </p>
       </div>
       <hr className="border-gray-300" />

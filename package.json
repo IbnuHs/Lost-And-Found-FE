@@ -18,6 +18,8 @@
     "@reduxjs/toolkit": "^2.2.6",
     "@tanstack/react-query": "^5.50.1",
     "axios": "^1.7.2",
+    "flowbite": "^2.4.1",
+    "flowbite-react": "^0.10.1",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.381.0",
     "react": "^18.2.0",
