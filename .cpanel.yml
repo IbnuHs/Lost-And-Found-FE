@@ -1,6 +1,0 @@
----
-deployment:
-      tasks:
-        - export DEPLOYPATH=/home/ibnu hasyim/public_html  
-        - /bin/cp * $DEPLOYPATH               
-       
