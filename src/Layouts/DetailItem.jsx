@@ -37,9 +37,9 @@ export default function DetailItem() {
   if (isSuccess && data) {
     return (
       <div className="px-5 md:px-10 relative overflow-x-hidden">
-        <a href="/listreport" className="mt-4 -ml-2 block">
+        {/* <a href="/listreport" className="mt-4 -ml-2 block">
           <ArrowBackIosNew />
-        </a>
+        </a> */}
         {/* <button className="mt-4 -ml-2">
          <ArrowBackIosNew />
        </button> */}
