@@ -4,7 +4,6 @@ import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { getRole } from "../utils/getRole";
 
 export default function AdminRoute() {
-  const navigate = useNavigate();
   try {
     const role = getRole();
     // console.log(role);
