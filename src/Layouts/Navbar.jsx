@@ -17,7 +17,9 @@ export default function Navbar() {
     if (token !== null) {
       const decode = jwtDecode(token);
       userInfo(decode.userId).then((user) => {
-        setUserName(user.data.userName);
+        const fullName = user.data.userName;
+        const firstName = fullName.split(" ")[0];
+        setUserName(firstName);
       });
     }
     function handleClickOutside(event) {

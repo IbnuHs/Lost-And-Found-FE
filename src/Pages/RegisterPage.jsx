@@ -71,7 +71,7 @@ export default function RegisterPage() {
     <>
       <div className="flex items-center justify-center min-h-screen md:px-4 lg:px-6 py-2">
         <div className="flex flex-row max-w-[800px] items-center border-2 m-auto shadow-md md:shadow-lg ">
-          <div className="flex-grow min-w-[350px] h-full max-w-[50%] w-auto border hidden md:inline-block">
+          <div className="flex-grow min-w-[350px] h-full max-w-[51%] w-auto border hidden md:inline-block">
             <img
               src={fikom}
               alt=""
@@ -82,9 +82,6 @@ export default function RegisterPage() {
             <h1 className="font-semibold font-poppins text-[22px] text-center md:text-[22px]">
               Daftar
             </h1>
-            {/* <p className="text-red-600 text-[12px] text-center font-semibold">
-              Error Message
-            </p> */}
             <form
               onSubmit={onSubmit}
               className="flex m-auto flex-col gap-2 mt-5 min-w-64 w-full max-w-80 px-3 md:px-0 md:gap-1"
@@ -97,8 +94,8 @@ export default function RegisterPage() {
                   name="userName"
                   onChange={handleChange}
                   type="text"
-                  min={5}
-                  max={20}
+                  min="8"
+                  max="25"
                   placeholder="John Doe"
                   className="border-[#989898] focus:outline-none border shadow-md text-[12px] px-2 py-2 rounded-md lg:px-3"
                   required

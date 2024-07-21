@@ -8,20 +8,18 @@ import { jwtDecode } from "jwt-decode";
 export default function AdminRoute() {
   const token = sessionStorage.getItem("token");
   const [role, setRole] = useState("");
-  try {
-    useEffect(() => {});
-    if (token) {
+  useEffect(() => {
+    if (token !== null) {
       const decode = jwtDecode(token);
-      setRole(jwtDecode(decode));
+      setRole(decode.role);
     }
-
-    if (role && role === "Admin") {
-      return <Outlet />;
-    }
+  }, [token]);
+  if (!token) {
     return <Navigate to="/" />;
-  } catch (error) {
-    // alert(error);
-    console.log(error);
-    return error;
   }
+  if (role === "Admin") {
+    console.log(role);
+    return <Outlet />;
+  }
+  return <Navigate to="/" />;
 }
