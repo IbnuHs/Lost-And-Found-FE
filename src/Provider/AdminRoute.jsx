@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { getRole } from "../utils/getRole";
+import { useState } from "react";
+import { jwtDecode } from "jwt-decode";
 
 export default function AdminRoute() {
+  const token = sessionStorage.getItem("token");
+  const [role, setRole] = useState("");
   try {
-    const role = getRole();
-    // console.log(role);
-    if (role !== "Admin") {
-      console.log(role !== "Admin");
-      // navigate("/");
-      return <Navigate to="/" />;
-      // console.log(role);
+    useEffect(() => {});
+    if (token) {
+      const decode = jwtDecode(token);
+      setRole(jwtDecode(decode));
     }
 
-    return <Outlet />;
+    if (role && role === "Admin") {
+      return <Outlet />;
+    }
+    return <Navigate to="/" />;
   } catch (error) {
     // alert(error);
     console.log(error);
