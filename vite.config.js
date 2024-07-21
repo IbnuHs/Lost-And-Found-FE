@@ -9,5 +9,5 @@ export default defineConfig({
     outDir: "./dist", // direktori output
     sourcemap: true,
   },
-  base: "https://lostandfound.my.id/",
+  base: "https://lost-and-found.pages.dev/",
 });
