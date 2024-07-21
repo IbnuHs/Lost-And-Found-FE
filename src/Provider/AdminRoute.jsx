@@ -17,9 +17,11 @@ export default function AdminRoute() {
   if (!token) {
     return <Navigate to="/" />;
   }
-  if (role === "Admin") {
+  if (token && role === "Admin") {
     console.log(role);
     return <Outlet />;
   }
-  return <Navigate to="/" />;
+  if (role === "User") {
+    return <Navigate to="/" />;
+  }
 }
