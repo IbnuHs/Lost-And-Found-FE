@@ -16,7 +16,9 @@ export default function Navbar() {
   useEffect(() => {
     if (token !== null) {
       const decode = jwtDecode(token);
+      // console.log(decode);
       userInfo(decode.userId).then((user) => {
+        // console.log(user);
         const fullName = user.data.userName;
         const firstName = fullName.split(" ")[0];
         setUserName(firstName);

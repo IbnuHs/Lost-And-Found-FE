@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import picture from "../assets/Picture.jpg";
 import {
   Person2,
@@ -9,17 +9,18 @@ import {
 import { useParams } from "react-router-dom";
 import { api } from "../lib/API";
 import { useQuery } from "@tanstack/react-query";
-import { getRole } from "../utils/getRole";
 import { FinishedLostButton } from "../Components/FinishedLostButton";
 import FinishedFoundButton from "../Components/FinishedFoundButton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import { jwtDecode } from "jwt-decode";
 
 export default function DetailItem() {
   const { id } = useParams();
-
+  const [role, setRole] = useState("");
+  const token = sessionStorage.getItem("token");
   const { data, isError, isLoading, isSuccess } = useQuery({
     queryKey: ["getDetailReports"],
     queryFn: async () => {
@@ -30,7 +31,14 @@ export default function DetailItem() {
       throw new Error("Id is Undefined");
     },
   });
-  const role = getRole();
+  // const role = getRole();
+
+  useEffect(() => {
+    if (token !== null) {
+      const decode = jwtDecode(token);
+      setRole(decode.role);
+    }
+  }, [token]);
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
@@ -43,7 +51,7 @@ export default function DetailItem() {
         {/* <button className="mt-4 -ml-2">
          <ArrowBackIosNew />
        </button> */}
-        <h1 className="text-center font-semibold text-[22px] pb-6 lg:text-[26px] lg:pb-12">
+        <h1 className="text-center font-semibold text-[22px] pb-6 lg:text-[26px] lg:pb-12 lg:mt-10">
           Detail Item
         </h1>
         <div className="px-4 md:flex flex-row md:px-0 lg:justify-center lg:px-20  lg:gap-14 xl:gap-20">
@@ -111,7 +119,7 @@ export default function DetailItem() {
             </div>
           </div>
         </div>
-        <div className="max-w-[350px] m-auto mb-16 md:max-w-none px-4 md:px-9 lg:px-20 xl:w-[80%] xl:px-5">
+        <div className="max-w-[350px] m-auto mb-16 md:max-w-none px-4 md:px-9 lg:px-20 xl:w-[80%] xl:px-32">
           <div className="">
             <h1 className="font-semibold my-4 lg:text-[22px] lg:mt-8 xl:text-[24px]">
               Detail :

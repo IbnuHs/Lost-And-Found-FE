@@ -28,7 +28,7 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
       },
     };
     try {
-      const res = await api.post("/laporan/add", formData, config);
+      const res = await api.post("/laporan/create", formData, config);
       console.log(res);
       console.log("run run");
       return res.data;
