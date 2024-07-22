@@ -3,7 +3,7 @@ import Card from "../Components/Card";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../lib/API";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -34,9 +34,12 @@ export default function ListComponents() {
           pagination={{
             clickable: true,
           }}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
           className="mySwiper"
-          modules={[Pagination]}
-          navigation={true}
+          modules={[Pagination, Autoplay]}
         >
           {limitedData &&
             limitedData.map((i) => {
@@ -65,9 +68,12 @@ export default function ListComponents() {
           pagination={{
             clickable: true,
           }}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
           className="mySwiper"
-          modules={[Pagination]}
-          navigation={true}
+          modules={[Pagination, Autoplay]}
         >
           {limitedData &&
             limitedData.map((i) => {
@@ -97,9 +103,12 @@ export default function ListComponents() {
           pagination={{
             clickable: true,
           }}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
           className="mySwiper"
-          modules={[Pagination]}
-          navigation={true}
+          modules={[Pagination, Autoplay]}
         >
           {limitedData &&
             limitedData.map((i) => {
