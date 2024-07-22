@@ -22,6 +22,8 @@ import { ModalEdit } from "../Components/ModalEdit";
 export default function DetailItem() {
   const { id } = useParams();
   const [role, setRole] = useState("");
+  const [userId, setUserId] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const token = sessionStorage.getItem("token");
   const { data, isError, isLoading, isSuccess } = useQuery({
     queryKey: ["getDetailReports"],
@@ -33,12 +35,13 @@ export default function DetailItem() {
       throw new Error("Id is Undefined");
     },
   });
-  // const role = getRole();
 
   useEffect(() => {
     if (token !== null) {
       const decode = jwtDecode(token);
+      setUserEmail(decode.email);
       setRole(decode.role);
+      setUserId(decode.userId);
     }
   }, [token]);
   if (isLoading) {
@@ -66,21 +69,6 @@ export default function DetailItem() {
         </h1>
         <div className="px-4 md:flex flex-row md:px-0 lg:justify-center lg:px-20  lg:gap-14 xl:gap-20">
           <div className="border border-black relative md:min-w-[450px] max-w-[350px] m-auto lg:max-w-[450px] xl:max-w-[600px]">
-            {/* <Swiper navigation={true} modules={[Navigation]}>
-              {data.data.urlImg &&
-                data.data.urlImg.map((i, index) => {
-                  return (
-                    <SwiperSlide key={index}>
-                      <img
-                        src={i}
-                        alt=""
-                        className="object-center w-full max-w-[350px] m-auto lg:mx-0 lg:max-w-[450px] xl:max-w-[600px] aspect-video object-contain"
-                      />
-                    </SwiperSlide>
-                  );
-                })}
-            </Swiper> */}
-
             <img
               src={data.data.urlImg[0] ? data.data.urlImg[0] : picture}
               alt=""
@@ -109,11 +97,14 @@ export default function DetailItem() {
               <h1 className="font-semibold text-[20px] lg:text-[22px] xl:text-[24px]">
                 {data.data.nameItem}
               </h1>
-              <ModalEdit
-                nameItem={data.data.nameItem}
-                id={id}
-                desc={data.data.description}
-              />
+              {userEmail && userEmail === data.data.email && (
+                <ModalEdit
+                  nameItem={data.data.nameItem}
+                  id={id}
+                  desc={data.data.description}
+                />
+              )}
+
               <div className="flex gap-2 items-center">
                 <Person2 color="disabled" />
                 <p className="text-main-gray text-[14px] lg:text-[16px] xl:text-[18px]">
