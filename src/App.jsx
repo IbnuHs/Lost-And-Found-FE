@@ -16,6 +16,7 @@ import { store } from "./redux/store";
 import AdminRoute from "./Provider/AdminRoute";
 import ProfileProvider from "./Provider/ProfileProvider";
 import UserReports from "./Components/UserReports";
+import AboutPages from "./Pages/AboutPages";
 
 function App() {
   const location = useLocation();
@@ -34,11 +35,12 @@ function App() {
         {isLoginPage || isRegisterPage ? null : <Navbar />}
         {/* <Navbar /> */}
 
-        <main className="">
+        <main className="min-h-3.5">
           <Routes>
             <Route path="/" element={<HomePages />} />
             <Route path="/listreport" element={<ListPages />} />
             <Route path="/laporan/detail/:id" element={<DetailPages />} />
+            <Route path="/about" element={<AboutPages />} />
 
             <Route path="/masuk" element={<LoginPage />} />
             <Route path="/daftar" element={<RegisterPage />} />

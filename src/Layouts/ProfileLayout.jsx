@@ -17,7 +17,7 @@ export default function ProfileLayout(props) {
   function showFormPassword() {
     setShowFormPass(!showFormPass);
   }
-  console.log(props.userId);
+  // console.log(props.userId);
   const queryClient = useQueryClient();
   const [data, setData] = useState({
     id: props.userId,

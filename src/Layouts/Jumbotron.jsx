@@ -7,6 +7,7 @@ export default function Jumbotron() {
       <img
         src={panic}
         alt=""
+        loading="lazy"
         className=" m-auto md:max-w-[350px] lg:max-w-[450px] xl:max-w-[580px]"
       />
       <div className="px-2 mt-4 md:flex md:justify-center md:flex-col md:mb-5">

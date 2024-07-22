@@ -12,6 +12,7 @@ export default function Problem() {
         <div className="mt-8 flex flex-col justify-center items-center md:flex-row md:gap-4 lg:gap-10">
           <img
             src={lost}
+            loading="lazy"
             alt=""
             className=" m-auto md:max-w-[350px] lg:max-w-[450px] xl:max-w-[550px]"
           />
@@ -38,6 +39,7 @@ export default function Problem() {
         <div className="mt-8 flex flex-col justify-center items-center md:flex-row-reverse md:gap-4 lg:gap-16">
           <img
             src={find}
+            loading="lazy"
             alt=""
             className=" m-auto md:max-w-[300px] lg:max-w-[400px] xl:max-w-[500px]"
           />

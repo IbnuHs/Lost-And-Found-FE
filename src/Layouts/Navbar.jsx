@@ -87,7 +87,7 @@ export default function Navbar() {
         } font-semibold text-[14px] flex flex-col justify-center absolute right-0 left-0 items-center bg-main-gray gap-4 py-6 md:static md:flex-row md:py-0 md:text-[18px]`}
       >
         <Link to="/">Home</Link>
-        <Link to="/listreport">All Reports</Link>
+        <Link to="/listreport">Semua Laporan</Link>
         <Link to="/about">About</Link>
         {token ? (
           <button

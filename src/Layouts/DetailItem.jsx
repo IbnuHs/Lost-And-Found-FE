@@ -16,6 +16,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { jwtDecode } from "jwt-decode";
+import { Box, CircularProgress } from "@mui/material";
 
 export default function DetailItem() {
   const { id } = useParams();
@@ -40,11 +41,19 @@ export default function DetailItem() {
     }
   }, [token]);
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return (
+      <div className="min-h-screen">
+        <div className="col-span-1 mt-20 flex justify-center lg:col-span-2 xl:col-span-3">
+          <Box sx={{ display: "flex" }}>
+            <CircularProgress />
+          </Box>
+        </div>
+      </div>
+    );
   }
   if (isSuccess && data) {
     return (
-      <div className="px-5 md:px-10 relative overflow-x-hidden">
+      <div className="min-h-[50%] mt-8 px-5 md:px-10 relative overflow-x-hidden ">
         {/* <a href="/listreport" className="mt-4 -ml-2 block">
           <ArrowBackIosNew />
         </a> */}

@@ -96,6 +96,7 @@ export default function Card(props) {
       <div className="relative">
         <img
           src={props.urlImg[0] ? props.urlImg[0] : picture}
+          loading="lazy"
           className="object-contain w-full aspect-3/4 bg-main-gray"
           alt=""
         />

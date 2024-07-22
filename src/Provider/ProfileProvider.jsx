@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function ProfileProvider() {
   try {
@@ -7,7 +8,11 @@ export default function ProfileProvider() {
     if (token) {
       return <Outlet />;
     }
-    alert("Anda Perlu Login Terlebih dahulu");
+    Swal.fire({
+      text: "Harus Login Terlebih Dahulu",
+      icon: "warning",
+    });
+    // return;
     return <Navigate to="/" />;
   } catch (error) {
     console.log(error);

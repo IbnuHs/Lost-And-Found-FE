@@ -7,6 +7,7 @@ import UserInfo from "../Layouts/UserInfo";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../lib/API";
 import { jwtDecode } from "jwt-decode";
+import { Box, CircularProgress } from "@mui/material";
 
 export default function ProfilePages() {
   const token = sessionStorage.getItem("token");
@@ -22,7 +23,15 @@ export default function ProfilePages() {
   });
 
   if (getData.isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="min-h-screen">
+        <div className="col-span-1 mt-20 flex justify-center lg:col-span-2 xl:col-span-3">
+          <Box sx={{ display: "flex" }}>
+            <CircularProgress />
+          </Box>
+        </div>
+      </div>
+    );
   }
   if (getData.isSuccess && getData.data) {
     const user = getData.data.data;
