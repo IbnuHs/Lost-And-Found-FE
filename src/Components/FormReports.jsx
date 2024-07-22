@@ -12,6 +12,13 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
   const queryClient = useQueryClient();
   const [userId, setUserID] = useState("");
   const token = sessionStorage.getItem("token");
+  const inputRef = useRef(null);
+  const [nameItem, setNameItem] = useState("");
+  const [desc, setDesc] = useState("");
+  // const [date, setDate] = useState("");
+  const [category, setCategory] = useState("");
+  const [cases, setCases] = useState("");
+  const [images, setImage] = useState(defaultImage);
   useEffect(() => {
     if (token) {
       const decode = jwtDecode(token);
@@ -49,11 +56,11 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
       });
     },
     onSuccess: () => {
-      Swal.fire(
-        "Success",
-        "Laporan Akan Segera DiTerima Oleh Admin, Pantau Terus Laporan Anda Di Halaman Profile Anda",
-        "success"
-      );
+      const successMessage =
+        cases === "Kehilangan"
+          ? "Laporan Akan Dicek Admin, Pantau Terus Laporan Anda Di Halaman Profile, Kamu Akan Dihubungi Admin Jika Barangmu Ditemukan"
+          : "Laporan Akan Dicek Admin, Pantau Terus Laporan Anda Di Halaman Profile Anda";
+      Swal.fire("Success", successMessage, "success");
       queryClient.invalidateQueries(["getReports"]);
       setShowForm(true);
     },
@@ -64,13 +71,6 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
     },
   });
 
-  const inputRef = useRef(null);
-  const [nameItem, setNameItem] = useState("");
-  const [desc, setDesc] = useState("");
-  // const [date, setDate] = useState("");
-  const [category, setCategory] = useState("");
-  const [cases, setCases] = useState("");
-  const [images, setImage] = useState(defaultImage);
   const onChange = (e) => {
     const file = e.target.files[0];
     if (file) {
