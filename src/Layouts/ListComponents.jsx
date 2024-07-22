@@ -103,7 +103,7 @@ export default function ListComponents() {
         >
           {limitedData &&
             limitedData.map((i) => {
-              console.log(i);
+              // console.log(i);
               // const date = i.createdAt.slice(0, 10);
               return (
                 <SwiperSlide>

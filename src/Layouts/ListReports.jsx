@@ -271,7 +271,7 @@ export default function ListReports({ onShow }) {
               );
             })}
         </div>
-        {getData.data && getData.data && (
+        {getData.isSuccess && getData.data && getData.data && (
           <div className="m-auto flex items-center justify-center mt-10">
             <Stack>
               <Pagination
