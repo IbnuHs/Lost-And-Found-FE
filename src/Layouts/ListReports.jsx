@@ -20,7 +20,10 @@ export default function ListReports({ onShow }) {
     Category: "",
     statusClear: "",
     sortDirection: "",
+    searchTerm: "",
   });
+
+  // const [refetch, setRefetch] = useState(false);
 
   const getData = useQuery({
     queryKey: ["getReports"],
@@ -64,16 +67,19 @@ export default function ListReports({ onShow }) {
       <div className="flex flex-col-reverse gap-4 lg:inline-block lg:mt-1 xl:min-w-[300px] xl:max-w-[350px]">
         {/* Button */}
         <div className="flex w-full border-[2px] border-black mt-auto rounded-full px-4 items-center shadow-lg xl:mb-8">
-          <input
-            type="search"
-            name=""
-            id=""
-            placeholder="Search"
-            className="flex-grow py-1 border-none focus:outline-none  text-black"
-          />
-          <button className="">
-            <SearchIcon />
-          </button>
+          <form action="" onSubmit={handleSubmit}>
+            <input
+              type="search"
+              name="searchTerm"
+              id=""
+              placeholder="Search"
+              onChange={handleFilterChange}
+              className="flex-grow py-1 border-none  focus:outline-none focus:ring-0 outline-none text-black capitalize"
+            />
+            <button type="submit" className="">
+              <SearchIcon />
+            </button>
+          </form>
         </div>
         <div className="">
           <div className="">

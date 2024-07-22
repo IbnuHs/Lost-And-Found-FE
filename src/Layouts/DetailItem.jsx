@@ -17,6 +17,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { jwtDecode } from "jwt-decode";
 import { Box, CircularProgress } from "@mui/material";
+import { ModalEdit } from "../Components/ModalEdit";
 
 export default function DetailItem() {
   const { id } = useParams();
@@ -103,10 +104,16 @@ export default function DetailItem() {
             >
               {data && data.data.case}
             </h1>
-            <div className="flex flex-col gap-4 my-6 ">
+
+            <div className="flex flex-col gap-4 my-6 relative">
               <h1 className="font-semibold text-[20px] lg:text-[22px] xl:text-[24px]">
                 {data.data.nameItem}
               </h1>
+              <ModalEdit
+                nameItem={data.data.nameItem}
+                id={id}
+                desc={data.data.description}
+              />
               <div className="flex gap-2 items-center">
                 <Person2 color="disabled" />
                 <p className="text-main-gray text-[14px] lg:text-[16px] xl:text-[18px]">
