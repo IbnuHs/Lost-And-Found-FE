@@ -66,21 +66,27 @@ export default function ListReports({ onShow }) {
     <div className="px-4 pt-4-6 pb-10 lg:flex lg:gap-10 lg:justify-center lg:mt-8 ">
       <div className="flex flex-col-reverse gap-4 lg:inline-block lg:mt-1 xl:min-w-[300px] xl:max-w-[350px]">
         {/* Button */}
-        <div className="flex w-full border-[2px] border-black mt-auto rounded-full px-4 items-center shadow-lg xl:mb-8">
-          <form action="" onSubmit={handleSubmit}>
-            <input
-              type="search"
-              name="searchTerm"
-              id=""
-              placeholder="Search"
-              onChange={handleFilterChange}
-              className="flex-grow py-1 border-none  focus:outline-none focus:ring-0 outline-none text-black capitalize"
-            />
-            <button type="submit" className="">
-              <SearchIcon />
-            </button>
-          </form>
-        </div>
+
+        <form
+          action=""
+          className="flex w-full border-[2px] border-black   mt-auto rounded-full px-4 pr-1 items-center shadow-lg xl:mb-8"
+          onSubmit={handleSubmit}
+        >
+          <input
+            type="search"
+            name="searchTerm"
+            id=""
+            placeholder="Search"
+            onChange={handleFilterChange}
+            className="flex-grow py-1 border-none  focus:outline-none focus:ring-0 outline-none text-black capitalize"
+          />
+          <button
+            type="submit"
+            className="border-2 rounded-r-full px-2 bg-main-gray"
+          >
+            <SearchIcon color="white" />
+          </button>
+        </form>
         <div className="">
           <div className="">
             <div className="flex items-center justify-between mt-4 px-2">
