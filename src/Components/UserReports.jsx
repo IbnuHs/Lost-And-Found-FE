@@ -38,12 +38,14 @@ export default function UserReports() {
       </div>
       {/* <DeletePrompt /> */}
       <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-6 justify-items-center overflow-scroll xl:justify-items-start m-auto xl:m-4">
-        {getData.isLoading && <div className="">Loading .... </div>}
+        {getData.isLoading && <div className="min-h-screen">Loading .... </div>}
         {getData.isSuccess &&
           getData.data.data &&
           getData.data.data.length === 0 && (
             <div className="col-span-1 flex justify-center lg:col-span-2 xl:col-span-3 xl:row-span-5 lg:min-h-[400px]">
-              <h1 className="text-lg font-semibold">Kosong</h1>
+              <h1 className="text-lg font-semibold min-h-screen pt-10">
+                Kosong
+              </h1>
             </div>
           )}
         {getData.isSuccess &&
