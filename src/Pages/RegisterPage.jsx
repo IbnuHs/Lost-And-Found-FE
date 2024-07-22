@@ -88,7 +88,7 @@ export default function RegisterPage() {
             >
               <div className="flex flex-col gap-[5px]">
                 <label htmlFor="Name" className="text-[13px] md:text-[14px] ">
-                  Name
+                  Nama
                 </label>
                 <input
                   name="userName"
