@@ -15,10 +15,12 @@ export default function Jumbotron() {
           Kehilangan atau Menemukan Barang Di Area Fikom
         </h1>
         <p className="text-[16px] md:text-[14px] lg:text-[16px] font-source-sans3 mt-5 xl:text-[20px]">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s.Lorem Ipsum has been the industry's standard dummy
-          text ever since the 1500s
+          Aplikasi ini dirancang untuk membantu Anda melaporkan dan mencari
+          barang yang hilang atau ditemukan di area Fikom. Dengan fitur yang
+          mudah digunakan dan berbasis web, kami berharap dapat memudahkan
+          proses pencarian dan pelaporan barang. Pastikan untuk memberikan
+          informasi yang jelas dan akurat agar laporan Anda dapat segera
+          ditindaklanjuti.
         </p>
       </div>
     </div>

@@ -21,10 +21,11 @@ export default function Problem() {
               Kehilangan Barang
             </h1>
             <p className="text-[16px] md:text-[14px] lg:text-[16px] xl:text-[18px]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              Apakah Anda kehilangan barang di area kampus? Gunakan platform
+              kami untuk melaporkan barang yang hilang. Dengan melaporkan
+              kehilangan Anda, Anda akan membantu kami dalam proses pencarian
+              barang Anda. Kami akan memproses laporan Anda dan menginformasikan
+              jika barang Anda ditemukan.
             </p>
             <div className="mt-4">
               <a
@@ -48,10 +49,10 @@ export default function Problem() {
               Menemukan Barang
             </h1>
             <p className="text-[16px] md:text-[14px] lg:text-[16px] xl:text-[18px]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              Jika Anda menemukan barang di area kampus, laporkan temuan Anda
+              melalui platform kami. Dengan melaporkan barang yang ditemukan,
+              Anda membantu agar barang tersebut dapat dikembalikan kepada
+              pemiliknya dengan mudah dan cepat.
             </p>
             <div className="mt-4">
               <a
