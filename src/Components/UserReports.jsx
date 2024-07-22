@@ -37,7 +37,7 @@ export default function UserReports() {
         {/* <hr className="h-1 bg-[#5C5F62] m-auto mt-1" /> */}
       </div>
       {/* <DeletePrompt /> */}
-      <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-6 justify-items-center overflow-scroll xl:justify-items-start m-auto xl:m-4 min-h-screen">
+      <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-6 justify-items-center overflow-scroll xl:justify-items-start m-auto xl:m-4">
         {getData.isLoading && <div className="">Loading .... </div>}
         {getData.isSuccess &&
           getData.data.data &&
