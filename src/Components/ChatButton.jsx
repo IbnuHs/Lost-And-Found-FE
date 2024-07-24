@@ -1,5 +1,5 @@
 import React from "react";
-import { MessageCircleMoreIcon, CheckCheckIcon } from "lucide-react";
+import { MessageCircleMoreIcon } from "lucide-react";
 import Swal from "sweetalert2";
 import { api } from "../lib/API";
 import { useMutation } from "@tanstack/react-query";

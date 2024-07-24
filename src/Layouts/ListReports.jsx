@@ -80,10 +80,7 @@ export default function ListReports({ onShow }) {
             onChange={handleFilterChange}
             className="flex-grow py-1 border-none  focus:outline-none focus:ring-0 outline-none text-black capitalize"
           />
-          <button
-            type="submit"
-            className="border-2 rounded-r-full px-2 bg-main-gray"
-          >
+          <button type="submit" className="rounded-r-full px-2 bg-main-gray">
             <SearchIcon color="white" />
           </button>
         </form>

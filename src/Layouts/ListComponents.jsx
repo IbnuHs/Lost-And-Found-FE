@@ -44,9 +44,8 @@ export default function ListComponents() {
           {limitedData &&
             limitedData.map((i) => {
               return (
-                <SwiperSlide>
+                <SwiperSlide key={i.id}>
                   <Card
-                    key={i.id}
                     id={i.id}
                     nameItem={i.nameItem}
                     case={i.case}
@@ -79,9 +78,8 @@ export default function ListComponents() {
             limitedData.map((i) => {
               // console.log(i.user);
               return (
-                <SwiperSlide>
+                <SwiperSlide key={i.id}>
                   <Card
-                    key={i.id}
                     id={i.id}
                     nameItem={i.nameItem}
                     case={i.case}
@@ -115,9 +113,8 @@ export default function ListComponents() {
               // console.log(i);
               // const date = i.createdAt.slice(0, 10);
               return (
-                <SwiperSlide>
+                <SwiperSlide key={i.id}>
                   <Card
-                    key={i.id}
                     id={i.id}
                     nameItem={i.nameItem}
                     case={i.case}

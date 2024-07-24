@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { AlignJustify, LogInIcon, LogOutIcon, Plus } from "lucide-react";
 import profile from "../assets/user.png";
-import confuse from "../assets/interactive_5680423.png";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { userInfo } from "../utils/getUserInfo";
@@ -57,12 +56,14 @@ export default function Navbar() {
     navigate("/masuk");
   };
   return (
-    <div className=" bg-main-gray max-w-screen z-50 text-white px-6 py-4 flex justify-between items-center xl:px-16 ">
+    <div className=" bg-main-gray max-w-screen z-50 text-white px-6 py-2 md:py-4 flex justify-between items-center xl:px-16 ">
       <div className="w-[30px] md:hidden">
         <Link to="/profile">
           <img src={profile} alt="" className="w-full rounded-full bg-white" />
 
-          {/* <h1 className="text-[10px]">{userName}</h1> */}
+          <h1 className="text-[10px] text-center font-semibold mt-[2px]">
+            {userName || "Guest"}
+          </h1>
         </Link>
       </div>
       <h1 className="text-[24px] font-semibold xl:text-[25px]">

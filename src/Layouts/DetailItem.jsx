@@ -4,20 +4,18 @@ import {
   Person2,
   CalendarMonthRounded,
   PermContactCalendar,
-  ArrowBackIosNew,
 } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
 import { api } from "../lib/API";
 import { useQuery } from "@tanstack/react-query";
 import { FinishedLostButton } from "../Components/FinishedLostButton";
 import FinishedFoundButton from "../Components/FinishedFoundButton";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { jwtDecode } from "jwt-decode";
 import { Box, CircularProgress } from "@mui/material";
 import { ModalEdit } from "../Components/ModalEdit";
+import contactcenter from "../assets/support_1067566.png";
 
 export default function DetailItem() {
   const { id } = useParams();
@@ -57,7 +55,7 @@ export default function DetailItem() {
   }
   if (isSuccess && data) {
     return (
-      <div className="min-h-[50%] mt-8 px-5 md:px-10 relative overflow-x-hidden ">
+      <div className="min-h-[50%] mt-8 px-5 md:px-10 relative overflow-x-hidden">
         {/* <a href="/listreport" className="mt-4 -ml-2 block">
           <ArrowBackIosNew />
         </a> */}
@@ -152,24 +150,41 @@ export default function DetailItem() {
             )}
         </div>
 
-        {/* Button If Case Barang Ditemukan */}
-        {!data.data.statusClear &&
-          data.data.statusLaporan !== "PENDING" &&
-          role === "Admin" &&
-          data.data.case === "Penemuan" && (
-            <div className="flex flex-col items-center absolute bottom-5 right-14">
-              <FinishedFoundButton id={id} />
-            </div>
+        <div className="flex flex-col items-end px-4 xl:px-10 sticky bottom-36">
+          {/* Button If Case Barang Ditemukan */}
+          {!data.data.statusClear &&
+            data.data.statusLaporan !== "PENDING" &&
+            role === "Admin" &&
+            data.data.case === "Penemuan" && (
+              <div className="">
+                <FinishedFoundButton id={id} />
+              </div>
+            )}
+          {/* Button If Case Barang Hilang */}
+          {!data.data.statusClear &&
+            data.data.statusLaporan !== "PENDING" &&
+            role === "Admin" &&
+            data.data.case === "Kehilangan" && (
+              <div className="">
+                <FinishedLostButton email={data.data.email} id={id} />
+              </div>
+            )}
+
+          {role !== "Admin" && (
+            <a
+              target="_blank"
+              href="https://wa.me/+6285156546388?text=Halo%20Admin"
+              className="px-1 py-1 text-sm text-center font-semibold"
+            >
+              <img
+                src={contactcenter}
+                alt=""
+                className="w-10 border-2 border-black rounded-full xl:w-12"
+              />
+              Admin
+            </a>
           )}
-        {/* Button If Case Barang Hilang */}
-        {!data.data.statusClear &&
-          data.data.statusLaporan !== "PENDING" &&
-          role === "Admin" &&
-          data.data.case === "Kehilangan" && (
-            <div className="flex flex-col items-center absolute bottom-5 right-14">
-              <FinishedLostButton email={data.data.email} id={id} />
-            </div>
-          )}
+        </div>
       </div>
     );
   }
