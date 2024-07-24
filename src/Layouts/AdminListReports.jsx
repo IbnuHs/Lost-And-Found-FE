@@ -52,7 +52,7 @@ export default function AdminListReports() {
               name=""
               id=""
               placeholder="Search"
-              className="flex-grow py-1 focus:outline-none text-black bg-transparent"
+              className="flex-grow py-1 border-none focus:ring-0 focus:outline-none text-black bg-transparent"
             />
             <button className="">
               <SearchIcon />
@@ -196,7 +196,7 @@ export default function AdminListReports() {
       <div className="">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-6 justify-items-center xl:justify-items-start m-auto xl:m-4">
           {isLoading && (
-            <div className="col-span-1 flex justify-center lg:col-span-2 xl:col-span-3">
+            <div className="col-span-1 flex justify-center lg:col-span-2 xl:col-span-3 w-full mt-44">
               <Box sx={{ display: "flex" }}>
                 <CircularProgress />
               </Box>

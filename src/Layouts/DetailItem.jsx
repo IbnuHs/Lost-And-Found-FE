@@ -167,7 +167,7 @@ export default function DetailItem() {
           role === "Admin" &&
           data.data.case === "Kehilangan" && (
             <div className="flex flex-col items-center absolute bottom-5 right-14">
-              <FinishedLostButton id={id} />
+              <FinishedLostButton email={data.data.email} id={id} />
             </div>
           )}
       </div>

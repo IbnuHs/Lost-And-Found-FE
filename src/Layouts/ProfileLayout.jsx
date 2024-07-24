@@ -173,7 +173,7 @@ export default function ProfileLayout(props) {
                 name="userName"
                 type="text"
                 onChange={handleChange}
-                className="outline-none px-2 font-semibold capitalize"
+                className="outline-none border-none  px-2  focus:ring-0 font-semibold capitalize"
                 placeholder={props.userName}
               />
             </div>
@@ -185,7 +185,7 @@ export default function ProfileLayout(props) {
                 name="noHp"
                 type="text"
                 onChange={handleChange}
-                className="outline-none px-2 font-semibold capitalize"
+                className="outline-none border-none  focus:ring-0 px-2 font-semibold capitalize"
                 placeholder={props.noHp}
               />
             </div>
@@ -197,7 +197,7 @@ export default function ProfileLayout(props) {
               <input
                 name="noIdentity"
                 type="text"
-                className="outline-none px-2 font-semibold capitalize"
+                className="outline-none border-none   focus:ring-0 px-2 font-semibold capitalize"
                 placeholder={props.numIdentity}
               />
             </div>

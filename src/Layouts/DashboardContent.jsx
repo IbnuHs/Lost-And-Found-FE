@@ -42,7 +42,7 @@ export default function DashboardContent() {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-3 mt-5 max-h-[540px] overflow-scroll gap-3 bg-white px-6 py-6 rounded-lg lg:gap-5 min-h-[200px]">
+      <div className="grid grid-cols-3 mt-5 max-h-[540px] overflow-scroll gap-3 bg-white px-6 py-6 rounded-lg lg:gap-5 min-h-[200px] overflow-x-hidden">
         {/* <CardsAdmin /> */}
         {data.isLoading && (
           <div className="col-span-3 flex justify-center lg:col-span-2 xl:col-span-3">

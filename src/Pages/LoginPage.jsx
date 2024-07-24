@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { api } from "../lib/API";
 import { jwtDecode } from "jwt-decode";
 import { CircularProgress } from "@mui/material";
+import Swal from "sweetalert2";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -15,6 +16,21 @@ export default function LoginPage() {
   const [role, setRole] = useState("");
 
   const navigate = useNavigate();
+
+  const toastMixin = Swal.mixin({
+    toast: true,
+    icon: "success",
+    title: "General Title",
+    animation: false,
+    position: "top-right",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
   useEffect(() => {
     if (role === "Admin") navigate("/admin");
     if (role === "User") navigate("/");
@@ -41,6 +57,10 @@ export default function LoginPage() {
     },
     onSuccess: () => {
       setLoading(false);
+      toastMixin.fire({
+        animation: true,
+        title: "Berhasil Login",
+      });
       console.log("on Success");
     },
     onError: () => {

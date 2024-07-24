@@ -73,7 +73,7 @@ export default function ContentProfile(props) {
     });
   };
   return (
-    <div className="hidden md:flex flex-col flex-grow px-4">
+    <div className="hidden  md:flex flex-col flex-grow px-4">
       <div className="border-b-4 border-b-main-gray pb-3">
         <h1 className="text-[24px] font-semibold text-center">Edit Profile</h1>
       </div>
@@ -86,7 +86,7 @@ export default function ContentProfile(props) {
           action=""
           className="flex px-6 mt-8 relative font-source-sans3 flex-col gap-5 max-w-[80%] m-auto"
         >
-          <div className="flex flex-col border-b-2 pb-2 border-black">
+          <div className="flex flex-col border-b-2 border-x-0 border-t-0 pb-2 border-black">
             <label htmlFor="nama" className="text-[15px] px-2">
               Nama
             </label>
@@ -94,7 +94,7 @@ export default function ContentProfile(props) {
               name="userName"
               onChange={handleChange}
               type="text"
-              className="outline-none px-2 font-semibold text-[16px] capitalize"
+              className="outline-none border-none focus:ring-0 px-2 font-semibold text-[16px] capitalize"
               placeholder={props.userName}
             />
           </div>
@@ -106,7 +106,7 @@ export default function ContentProfile(props) {
               name="noHp"
               onChange={handleChange}
               type="text"
-              className="outline-none px-2 font-semibold text-[16px] capitalize"
+              className="outline-none border-none focus:ring-0 px-2 font-semibold text-[16px] capitalize"
               placeholder={props.noHp}
             />
           </div>
@@ -119,7 +119,7 @@ export default function ContentProfile(props) {
               name="noIdentity"
               onChange={handleChange}
               type="text"
-              className="outline-none px-2 font-semibold text-[16px] capitalize"
+              className="outline-none border-none focus:ring-0 px-2 font-semibold text-[16px] capitalize"
               placeholder={props.numIdentity}
             />
           </div>

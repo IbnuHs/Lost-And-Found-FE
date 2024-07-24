@@ -2,16 +2,13 @@ import React from "react";
 import { MessageCircleMoreIcon, CheckCheckIcon } from "lucide-react";
 import Swal from "sweetalert2";
 import { api } from "../lib/API";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { ChatButton } from "./ChatButton";
+import { useMutation } from "@tanstack/react-query";
 
-export const FinishedLostButton = ({ id, email }) => {
-  const queryClient = useQueryClient();
-
+export const ChatButton = ({ email }) => {
   const postData = async () => {
     try {
-      const res = await api.post("/laporan/claimlost", {
-        id: id,
+      const res = await api.post("/user/sendEmail", {
+        email: email,
       });
       return res.data;
     } catch (error) {
@@ -31,8 +28,7 @@ export const FinishedLostButton = ({ id, email }) => {
     },
     onSuccess: () => {
       Swal.close();
-      Swal.fire("Success", "Laporan telah diselesaikan", "success");
-      queryClient.invalidateQueries(["getReports", "getDetailReports"]);
+      Swal.fire("Success", "Email Telah Dikirim", "success");
     },
     onError: () => {
       Swal.close();
@@ -40,9 +36,9 @@ export const FinishedLostButton = ({ id, email }) => {
     },
   });
 
-  const onConfirm = () => {
+  const onChat = () => {
     Swal.fire({
-      text: "Apkah Anda Ingin Menyelesaikan Laporan ini",
+      text: `Apkah Anda Ingin email ke ${email}`,
       icon: "question",
       showCancelButton: true,
       cancelButtonColor: "red",
@@ -56,10 +52,9 @@ export const FinishedLostButton = ({ id, email }) => {
   };
   return (
     <>
-      <ChatButton email={email} />
-      <button onClick={onConfirm} className="flex flex-col items-center">
-        <CheckCheckIcon size={30} />
-        <h1 className="font-semibold">Selesaikan</h1>
+      <button onClick={onChat} className="flex flex-col items-center">
+        <MessageCircleMoreIcon size={30} />
+        <h1 className="font-semibold">Chat</h1>
       </button>
     </>
   );

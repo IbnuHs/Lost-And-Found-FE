@@ -137,38 +137,39 @@ export default function Card(props) {
             <h1 className="text-[18px]">{props.nameItem}</h1>
           </a>
           <p className="text-[13px] text-[#545458]">{props.date}</p>
-          {decode.userId && props.userId === decode.userId && (
-            <div className="absolute -right-3 top-2">
-              <IconButton
-                aria-label="more"
-                id="long-button"
-                aria-controls={open ? "long-menu" : undefined}
-                aria-expanded={open ? "true" : undefined}
-                aria-haspopup="true"
-                onClick={handleClick}
-              >
-                <MoreVert />
-              </IconButton>
-              <Menu
-                id="long-menu"
-                MenuListProps={{
-                  "aria-labelledby": "long-button",
-                }}
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                property={{
-                  style: {
-                    maxHeight: ITEM_HEIGHT * 4.5,
-                    width: "80px",
-                    marginRight: "100px",
-                  },
-                }}
-              >
-                <MenuItem onClick={handlePrompt}>Delete</MenuItem>
-              </Menu>
-            </div>
-          )}
+          {role === "Admin" ||
+            (decode.userId && props.userId === decode.userId && (
+              <div className="absolute -right-3 top-2">
+                <IconButton
+                  aria-label="more"
+                  id="long-button"
+                  aria-controls={open ? "long-menu" : undefined}
+                  aria-expanded={open ? "true" : undefined}
+                  aria-haspopup="true"
+                  onClick={handleClick}
+                >
+                  <MoreVert />
+                </IconButton>
+                <Menu
+                  id="long-menu"
+                  MenuListProps={{
+                    "aria-labelledby": "long-button",
+                  }}
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  property={{
+                    style: {
+                      maxHeight: ITEM_HEIGHT * 4.5,
+                      width: "80px",
+                      marginRight: "100px",
+                    },
+                  }}
+                >
+                  <MenuItem onClick={handlePrompt}>Delete</MenuItem>
+                </Menu>
+              </div>
+            ))}
         </div>
         <div className="">
           <div className="flex flex-col gap-1">

@@ -73,14 +73,14 @@ export default function ChangePassword(props) {
           onChange={(e) => setOldPass(e.target.value)}
           placeholder="Masukkan Password Lama"
           required
-          className="border-b-2 border-black flex-grow outline-none font-semibold px-1 pb-2"
+          className="focus:ring-0 border-b-2 border-x-0 border-t-0 border-black flex-grow outline-none font-semibold px-1 pb-2"
         />
         <input
           type="password"
           required
           onChange={(e) => setNewPass(e.target.value)}
           placeholder="Masukkan Password Baru"
-          className="border-b-2 border-black flex-grow outline-none font-semibold px-1 pb-2"
+          className="focus:ring-0 border-b-2 border-x-0 border-t-0 border-black flex-grow outline-none font-semibold px-1 pb-2"
         />
         <div className="flex mt-4 gap-3 justify-end">
           <button

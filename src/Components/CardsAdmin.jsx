@@ -21,6 +21,15 @@ export default function CardsAdmin(props) {
   };
   const mutation = useMutation({
     mutationFn: postData,
+    onMutate: () => {
+      Swal.fire({
+        title: "Loading",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+    },
     onSuccess: (data, variables) => {
       console.log(data);
       console.log(variables);
