@@ -146,7 +146,7 @@ export default function ListReports({ onShow }) {
               {/* Kategori Barang */}
               <div className="flex flex-col gap-1">
                 <label htmlFor="" className="font-semibold text-[18px]">
-                  Kategori Barang
+                  Jenis Barang
                 </label>
                 <div className="flex items-center relative">
                   <select

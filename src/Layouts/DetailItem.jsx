@@ -4,6 +4,8 @@ import {
   Person2,
   CalendarMonthRounded,
   PermContactCalendar,
+  Category,
+  ContactPhone,
 } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
 import { api } from "../lib/API";
@@ -119,6 +121,19 @@ export default function DetailItem() {
                 <PermContactCalendar color="disabled" />
                 <p className="text-main-gray text-[14px] lg:text-[16px] xl:text-[18px]">
                   {data.data.email}
+                </p>
+              </div>
+
+              <div className="flex gap-2 items-center">
+                <ContactPhone color="disabled" />
+                <p className="text-main-gray text-[14px] lg:text-[16px] xl:text-[18px]">
+                  {data.data.noHp}
+                </p>
+              </div>
+              <div className="flex gap-2 items-center">
+                <Category color="disabled" />
+                <p className="text-main-gray text-[14px] lg:text-[16px] xl:text-[18px]">
+                  {data.data.category}
                 </p>
               </div>
             </div>

@@ -43,6 +43,7 @@ export default function ListComponents() {
         >
           {limitedData &&
             limitedData.map((i) => {
+              const date = i.createdAt.slice(0, 10);
               return (
                 <SwiperSlide key={i.id}>
                   <Card
@@ -54,6 +55,7 @@ export default function ListComponents() {
                     urlImg={i.urlImg}
                     isClear={i.statusClear}
                     user={i.user}
+                    date={date}
                   />
                 </SwiperSlide>
               );
@@ -77,6 +79,7 @@ export default function ListComponents() {
           {limitedData &&
             limitedData.map((i) => {
               // console.log(i.user);
+              const date = i.createdAt.slice(0, 10);
               return (
                 <SwiperSlide key={i.id}>
                   <Card
@@ -88,6 +91,7 @@ export default function ListComponents() {
                     urlImg={i.urlImg}
                     isClear={i.statusClear}
                     user={i.user}
+                    date={date}
                   />
                 </SwiperSlide>
               );
@@ -111,7 +115,7 @@ export default function ListComponents() {
           {limitedData &&
             limitedData.map((i) => {
               // console.log(i);
-              // const date = i.createdAt.slice(0, 10);
+              const date = i.createdAt.slice(0, 10);
               return (
                 <SwiperSlide key={i.id}>
                   <Card
@@ -123,7 +127,7 @@ export default function ListComponents() {
                     urlImg={i.urlImg}
                     isClear={i.statusClear}
                     user={i.user}
-                    // date={date}
+                    date={date}
                   />
                 </SwiperSlide>
               );
