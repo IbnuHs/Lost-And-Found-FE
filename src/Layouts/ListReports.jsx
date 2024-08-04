@@ -63,7 +63,9 @@ export default function ListReports({ onShow }) {
     setFilterDrop(!filterDrop);
   }
   return (
-    <div className="px-4 pt-4-6 pb-10 lg:flex lg:gap-10 lg:justify-center lg:mt-8 ">
+    <div
+      className={`px-4 pt-4-6 pb-10 lg:flex lg:gap-10 lg:justify-center lg:mt-8 `}
+    >
       <div className="flex flex-col-reverse gap-4 lg:inline-block lg:mt-1 xl:min-w-[300px] xl:max-w-[350px]">
         {/* Button */}
 

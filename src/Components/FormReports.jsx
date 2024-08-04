@@ -104,20 +104,20 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
     <div
       className={`${
         showform ? "hidden" : "inline-block"
-      } fixed left-0 min-h-[400px] border right-0 top-0 bottom-0 z-20 py-16 px-4 backdrop-blur items-center overflow-scroll`}
+      } fixed left-0 min-h-[400px] right-0 top-0 bottom-0 z-50 px-4 backdrop-blur flex items-center overflow-hidden scroll-m-0 `}
     >
       <div className="flex border-2 border-black max-w-[750px] bg-white m-auto font-source-sans3 rounded-xl overflow-hidden">
         <div className="hidden md:flex max-w-[45%] bg-[#8C8C8C] px-6 flex-col py-24">
           <div className="flex flex-col gap-4">
             <img src={image} alt="" className="max-w-[300px] m-auto" />
             <p className="text-white text-[15px]">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum,
-              quaerat. Maxime, enim veniam ex id eius minus asperiores nihil
-              quisquam consequuntur doloribus, vero aliquam cupiditate
-              aspernatur esse accusantium ullam numquam. Eos, animi! Recusandae
-              deserunt in quia eveniet asperiores, sint totam. Labore quasi,
-              tempora reiciendis tenetur nobis cupiditate excepturi distinctio
-              necessitatibus sint iste quis illo,
+              Bantu Kami Menemukan Barang Anda Jelaskan barang yang hilang dan
+              kronologi kejadiannya sedetail mungkin. Semakin detail informasi
+              yang Anda berikan, semakin besar kemungkinan barang Anda
+              ditemukan. <br /> Bantu Kami Menyatukan Barang dengan Pemiliknya
+              Jelaskan barang yang Anda temukan dan detail ciri-cirinya. Jika
+              memungkinkan, cantumkan lokasi tempat Anda menemukan barang
+              tersebut.
             </p>
           </div>
         </div>

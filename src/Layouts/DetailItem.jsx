@@ -124,12 +124,14 @@ export default function DetailItem() {
                 </p>
               </div>
 
-              <div className="flex gap-2 items-center">
-                <ContactPhone color="disabled" />
-                <p className="text-main-gray text-[14px] lg:text-[16px] xl:text-[18px]">
-                  {data.data.noHp}
-                </p>
-              </div>
+              {data.data && role === "Admin" && (
+                <div className="flex gap-2 items-center">
+                  <ContactPhone color="disabled" />
+                  <p className="text-main-gray text-[14px] lg:text-[16px] xl:text-[18px]">
+                    {data.data.noHp}
+                  </p>
+                </div>
+              )}
               <div className="flex gap-2 items-center">
                 <Category color="disabled" />
                 <p className="text-main-gray text-[14px] lg:text-[16px] xl:text-[18px]">
@@ -157,9 +159,9 @@ export default function DetailItem() {
                 </h1>
                 <div className="mt-2">
                   <p className="text-[14px] lg:text-[16px] xl:text-[18px] xl:w-[80%]">
-                    Nama &emsp;&emsp; &emsp; : {data.data.claimedBy}
+                    Nama &emsp;&emsp; &emsp; : {console.log(data.data)}
                   </p>
-                  <p>No Identitas &ensp; : {data.data.idPemilik}</p>
+                  <p>No Identitas &ensp; : {data.data}</p>
                 </div>
               </div>
             )}
