@@ -159,9 +159,9 @@ export default function DetailItem() {
                 </h1>
                 <div className="mt-2">
                   <p className="text-[14px] lg:text-[16px] xl:text-[18px] xl:w-[80%]">
-                    Nama &emsp;&emsp; &emsp; : {console.log(data.data)}
+                    Nama &emsp;&emsp; &emsp; : {data.data.claimedBy}
                   </p>
-                  <p>No Identitas &ensp; : {data.data}</p>
+                  <p>No Identitas &ensp; : {data.data.idPemilik}</p>
                 </div>
               </div>
             )}
