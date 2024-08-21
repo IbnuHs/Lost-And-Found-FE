@@ -6,6 +6,8 @@ import {
   PermContactCalendar,
   Category,
   ContactPhone,
+  PinDrop,
+  Mail,
 } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
 import { api } from "../lib/API";
@@ -35,6 +37,7 @@ export default function DetailItem() {
       throw new Error("Id is Undefined");
     },
   });
+  console.log(role === "Admin");
 
   useEffect(() => {
     if (token !== null) {
@@ -57,7 +60,7 @@ export default function DetailItem() {
   }
   if (isSuccess && data) {
     return (
-      <div className="min-h-[50%] mt-8 px-5 md:px-10 relative overflow-x-hidden">
+      <div className="min-h-[50%] mt-8 px-5 md:px-10 relative overflow-x-hidden pb-24">
         {/* <a href="/listreport" className="mt-4 -ml-2 block">
           <ArrowBackIosNew />
         </a> */}
@@ -117,12 +120,6 @@ export default function DetailItem() {
                   {data.data.createdAt.slice(0, 10)}
                 </p>
               </div>
-              <div className="flex gap-2 items-center">
-                <PermContactCalendar color="disabled" />
-                <p className="text-main-gray text-[14px] lg:text-[16px] xl:text-[18px]">
-                  {data.data.email}
-                </p>
-              </div>
 
               {data.data && role === "Admin" && (
                 <div className="flex gap-2 items-center">
@@ -132,16 +129,33 @@ export default function DetailItem() {
                   </p>
                 </div>
               )}
+              {(data.data && userEmail && role === "Admin") ||
+                (userEmail === data.data.email && (
+                  <div className="flex gap-2 items-center">
+                    <PinDrop color="disabled" />
+                    <p className="text-main-gray text-[14px] lg:text-[16px] xl:text-[18px]">
+                      {data.data.lokasi}
+                    </p>
+                  </div>
+                ))}
+
               <div className="flex gap-2 items-center">
                 <Category color="disabled" />
                 <p className="text-main-gray text-[14px] lg:text-[16px] xl:text-[18px]">
                   {data.data.category}
                 </p>
               </div>
+
+              <div className="flex gap-2 items-center">
+                <Mail color="disabled" />
+                <p className="text-main-gray text-[14px] lg:text-[16px] xl:text-[18px]">
+                  {data.data.email}
+                </p>
+              </div>
             </div>
           </div>
         </div>
-        <div className="max-w-[350px] m-auto mb-16 md:max-w-none px-4 md:px-9 lg:px-20 xl:w-[80%] xl:px-32">
+        <div className="max-w-[350px] m-auto  md:max-w-none px-4 md:px-9 lg:px-20 xl:w-[80%] xl:px-32">
           <div className="">
             <h1 className="font-semibold my-4 lg:text-[22px] lg:mt-8 xl:text-[24px]">
               Detail :
@@ -167,7 +181,7 @@ export default function DetailItem() {
             )}
         </div>
 
-        <div className="flex flex-col items-end px-4 xl:px-10 sticky bottom-36">
+        <div className="flex flex-col items-end px-4 xl:px-10 sticky ">
           {/* Button If Case Barang Ditemukan */}
           {!data.data.statusClear &&
             data.data.statusLaporan !== "PENDING" &&
@@ -202,6 +216,14 @@ export default function DetailItem() {
             </a>
           )}
         </div>
+        <p className="text-[14px] lg:text-[16px] lg:px-32 text-red-500">
+          {data &&
+            data.data.case === "Penemuan" &&
+            "*Harap Melapor Ke admin jika barang yang terlapor adalah milik anda"}
+          {data &&
+            data.data.case === "Kehilangan" &&
+            "*Harap Melapor Ke admin jika anda menemukan barang ini"}
+        </p>
       </div>
     );
   }

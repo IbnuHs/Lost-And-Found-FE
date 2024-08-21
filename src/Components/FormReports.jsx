@@ -14,6 +14,7 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
   const token = sessionStorage.getItem("token");
   const inputRef = useRef(null);
   const [nameItem, setNameItem] = useState("");
+  const [lokasi, setLokasi] = useState("");
   const [desc, setDesc] = useState("");
   // const [date, setDate] = useState("");
   const [category, setCategory] = useState("");
@@ -93,6 +94,7 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
       data.append("case", cases);
       data.append("category", category);
       data.append("desc", desc);
+      data.append("lokasi", lokasi);
       data.append("items", images);
       data.append("userId", userId);
       mutation.mutate(data);
@@ -104,7 +106,7 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
     <div
       className={`${
         showform ? "hidden" : "inline-block"
-      } fixed left-0 min-h-[400px] right-0 top-0 bottom-0 z-50 px-4 backdrop-blur flex items-center overflow-hidden scroll-m-0 `}
+      } fixed left-0 min-h-[400px] right-0 top-0 bottom-0 z-50 px-4 backdrop-blur flex items-center `}
     >
       <div className="flex border-2 border-black max-w-[750px] bg-white m-auto font-source-sans3 rounded-xl overflow-hidden">
         <div className="hidden md:flex max-w-[45%] bg-[#8C8C8C] px-6 flex-col py-24">
@@ -124,7 +126,7 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
         <form
           action=""
           onSubmit={onSubmit}
-          className="flex-grow px-6 py-10 flex flex-col gap-3"
+          className="flex-grow px-6 py-10 flex flex-col gap-3 "
         >
           <div className="flex flex-col gap-2">
             <label htmlFor="namaItem" className="font-semibold">
@@ -178,7 +180,7 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
               Kategori Barang
             </label>
             <select
-              name="kategori karang"
+              name="kategori barang"
               id=""
               defaultValue=""
               onChange={(e) => setCategory(e.target.value)}
@@ -199,6 +201,33 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
               className="rotate-90 absolute right-4 bottom-[14px]"
             />
           </div>
+          <div className="flex flex-col gap-2 relative">
+            <label htmlFor="lokasi" className="font-semibold">
+              Lokasi
+            </label>
+            <select
+              name="lokasi"
+              id=""
+              defaultValue=""
+              onChange={(e) => setLokasi(e.target.value)}
+              className="px-3 py-[5px] border-[#989898] border-[2px] rounded-md text-[#939393] text-[14px] bg-transparent flex items-center shadow-lg appearance-none w-full z-20 cursor-pointer lg:px-4 md:text-[16px] lg:text-[14px] font-semibold"
+            >
+              <option value="" disabled>
+                Lokasi Kehilangan/Penemuan
+              </option>
+              <option value="Lantai 1">Lantai 1</option>
+              <option value="Lantai 2">Lantai 2</option>
+              <option value="Lantai 3">Lantai 3</option>
+              <option value="Lantai 4">Lantai 4</option>
+              <option value="Luar Fakultas">Luar Fakultas</option>
+            </select>
+            <Play
+              color="black"
+              fill="black"
+              size="12px"
+              className="rotate-90 absolute right-4 bottom-[14px]"
+            />
+          </div>
           <div className="flex flex-col gap-2 relative ">
             <label htmlFor="Deskripsi" className="font-semibold">
               Deskripsi
@@ -209,7 +238,7 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
               placeholder="Deskripsikan Barang dan Kronologi Anda..."
               id=""
               cols={5}
-              rows={6}
+              rows={4}
               onChange={(e) => setDesc(e.target.value)}
               className="border-[#989898] border-[2px] rounded-md text-[#939393] font-semibold text-[14px] focus:outline-none px-4 py-4"
             ></textarea>

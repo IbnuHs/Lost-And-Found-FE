@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import fikom from "../assets/register-page.png";
-import { Play } from "lucide-react";
+import { Play, EyeIcon, EyeOffIcon } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { api } from "../lib/API";
 import { useMutation } from "@tanstack/react-query";
@@ -67,15 +67,19 @@ export default function RegisterPage() {
     mutation.mutate();
     // console.log(data);
   };
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <>
-      <div className="flex items-center justify-center min-h-screen md:px-4 lg:px-6 py-2">
+      <div className="flex items-center justify-center min-h-screen md:px-4 lg:px-6">
         <div className="flex flex-row max-w-[800px] items-center border-2 m-auto shadow-md md:shadow-lg ">
-          <div className="flex-grow min-w-[350px] h-full max-w-[51%] w-auto border hidden md:inline-block">
+          <div className="flex-grow min-w-[350px] h-full max-w-[51%] w-auto border hidden md:inline-block ">
             <img
               src={fikom}
               alt=""
-              className="w-full flex-grow-1 h-full  object-contain"
+              className="w-full flex-grow-1 h-full  object-contain border "
             />
           </div>
           <div className="flex flex-col m-auto justify-center font-poppins rounded-sm px-6 py-10  md:py-5 md:flex-grow lg:px-14">
@@ -100,6 +104,9 @@ export default function RegisterPage() {
                   className="border-[#989898] focus:outline-none border shadow-md text-[12px] px-2 py-2 rounded-md lg:px-3"
                   required
                 />
+                <p className="text-[10px] text-red-500">
+                  * Disarankan gunakan email aktif anda
+                </p>
               </div>
               <div className="flex flex-col gap-[5px]">
                 <label htmlFor="Email" className="text-[13px] md:text-[14px] ">
@@ -114,21 +121,34 @@ export default function RegisterPage() {
                   required
                 />
               </div>
-              <div className="flex flex-col gap-[5px]">
+              <div className="flex flex-col gap-[5px] ">
                 <label
                   htmlFor="Password"
                   className="text-[13px] md:text-[14px] "
                 >
                   Password
                 </label>
-                <input
-                  name="password"
-                  onChange={handleChange}
-                  type="password"
-                  placeholder="Masukkan Password"
-                  className="border-[#989898] focus:outline-none border shadow-md text-[12px] px-2 py-2 rounded-md lg:px-3"
-                  required
-                />
+                <div className="relative">
+                  <input
+                    name="password"
+                    onChange={handleChange}
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Masukkan Password"
+                    className="border-[#989898] w-full focus:outline-none border shadow-md text-[12px] px-2 py-2 rounded-md lg:px-3"
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="absolute right-2 top-0 bottom-0"
+                    onClick={togglePasswordVisibility}
+                  >
+                    {showPassword ? (
+                      <EyeOffIcon className="w-5" />
+                    ) : (
+                      <EyeIcon className="w-5" />
+                    )}
+                  </button>
+                </div>
               </div>
               <div className="flex flex-col gap-[5px]">
                 <label htmlFor="NoHp" className="text-[13px] md:text-[14px] ">
@@ -159,7 +179,7 @@ export default function RegisterPage() {
                       Status
                     </option>
                     <option value="Mahasiswa">Mahasiswa</option>
-                    <option value="Dosen">Dosen</option>
+                    <option value="Dosen">Staf Kampus / Dosen</option>
                     <option value="Tamu">Tamu</option>
                   </select>
                   <Play
@@ -188,11 +208,11 @@ export default function RegisterPage() {
                   *Tamu bisa memasukkan NIK atau dikosongkan
                 </p>
               </div>
-              <div className="flex flex-col justify-center mt-5 lg:mt-10">
+              <div className="flex flex-col justify-center mt-5 lg:mt-6">
                 <div className="m-auto">
                   <button
                     type="submit"
-                    className="bg-main-gray text-center text-white rounded-md px-8 py-2 text-[12px] md:py-[8px] flex items-center"
+                    className="bg-main-gray text-center text-white rounded-md px-8 py-2 text-[12px] md:py-[4px] flex items-center"
                   >
                     {loading ? <CircularProgress size={16} /> : "Daftar"}
                   </button>

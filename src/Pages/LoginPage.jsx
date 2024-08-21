@@ -6,6 +6,7 @@ import { api } from "../lib/API";
 import { jwtDecode } from "jwt-decode";
 import { CircularProgress } from "@mui/material";
 import Swal from "sweetalert2";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -74,6 +75,69 @@ export default function LoginPage() {
     mutation.mutate();
     // dispatch(login({ email, password }));
   };
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const [loadingReset, setLoadingReset] = useState(false);
+  const sendRecoveryCode = async (email) => {
+    try {
+      setLoadingReset(true);
+      const response = await api.post("/user/recoverycode", { email });
+      Swal.fire({
+        icon: "success",
+        title: "Kode Pemulihan Dikirim",
+        text: `Kami telah mengirim kode pemulihan ke ${email} untuk digunakan membuat password baru`,
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Gagal Mengirim Kode",
+        text:
+          error.response?.data?.message ||
+          "Terjadi kesalahan saat mengirim kode pemulihan.",
+      });
+    } finally {
+      setLoadingReset(false);
+    }
+  };
+  const resetPass = async () => {
+    const { value: email } = await Swal.fire({
+      title: "Masukkan Email Anda",
+      input: "email",
+      inputPlaceholder: "Masukkan Email Anda",
+      showLoaderOnConfirm: true,
+      preConfirm: async (email) => {
+        if (loadingReset) {
+          Swal.showLoading();
+        }
+        return sendRecoveryCode(email);
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    });
+
+    if (email) {
+      // Sudah ditangani di dalam preConfirm
+    }
+  };
+
+  // const resetPass = async () => {
+  //   const { value: email } = await Swal.fire({
+  //     title: "Masukkan Email Anda",
+  //     input: "email",
+  //     inputPlaceholder: "Masukkan Email Anda",
+  //   });
+  //   if (email) {
+  //     console.log(email);
+  //     // Swal.fire(`Kode Pemulihan Anda Telah dikirim ke: ${email}`);
+  //     Swal.fire({
+  //       title: "Kode Pemulihan Telah Dikirim",
+  //       text: `Kami telah mengirim kode pemulihan ke ${email} untuk digunakan membuat password baru`,
+  //     });
+  //   }
+  // };
+
   return (
     <div className="flex items-center justify-center min-h-screen md:px-8">
       <div className="flex flex-row max-w-[800px] items-center  border-2 box-content">
@@ -109,14 +173,32 @@ export default function LoginPage() {
               <label htmlFor="Password" className="text-[14px] md:text-[16px]">
                 Password
               </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Masukkan Password"
-                className="border-[#989898] focus:outline-none border shadow-md text-[14px] px-2 py-2 rounded-md md:py-3 lg:px-4 lg:text-[14px]"
-                required
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Masukkan Password"
+                  className="border-[#989898] w-full focus:outline-none border shadow-md text-[14px] px-2 py-2 rounded-md md:py-3 lg:px-4 lg:text-[14px]"
+                  required
+                />
+                <button
+                  type="button"
+                  className="absolute right-2 top-0 bottom-0"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <EyeOffIcon className="w-5" />
+                  ) : (
+                    <EyeIcon className="w-5" />
+                  )}
+                </button>
+              </div>
+              <div className="flex justify-end">
+                <button type="button" className="w-28" onClick={resetPass}>
+                  <p className="text-[12px] text-red-500">Lupa Password?</p>
+                </button>
+              </div>
             </div>
             <div className="flex flex-col justify-center mt-5">
               <div className="m-auto">

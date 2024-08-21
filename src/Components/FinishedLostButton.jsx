@@ -55,12 +55,12 @@ export const FinishedLostButton = ({ id, email }) => {
     });
   };
   return (
-    <>
+    <div className="flex flex-col justify-center">
       <ChatButton email={email} />
       <button onClick={onConfirm} className="flex flex-col items-center">
         <CheckCheckIcon size={30} />
         <h1 className="font-semibold">Selesaikan</h1>
       </button>
-    </>
+    </div>
   );
 };

@@ -17,6 +17,7 @@ import AdminRoute from "./Provider/AdminRoute";
 import ProfileProvider from "./Provider/ProfileProvider";
 import UserReports from "./Components/UserReports";
 import AboutPages from "./Pages/AboutPages";
+import ResetPassword from "./Pages/ResetPassword";
 
 function App() {
   const location = useLocation();
@@ -25,6 +26,7 @@ function App() {
   // const isRegisterPage = location.pathname.startsWith("/daftar");
   const isLoginPage = location.pathname.startsWith("/masuk");
   const isRegisterPage = location.pathname.startsWith("/daftar");
+  const isResetPage = location.pathname.startsWith("/resetPassword");
   return (
     <Provider store={store}>
       <div
@@ -32,15 +34,16 @@ function App() {
           isLoginPage ? "min-h-screen" : ""
         } min-h-screen`}
       >
-        {isLoginPage || isRegisterPage ? null : <Navbar />}
+        {isLoginPage || isRegisterPage || isResetPage ? null : <Navbar />}
         {/* <Navbar /> */}
 
-        <main className="min-h-3.5">
+        <main className="min-h-[80vh]">
           <Routes>
             <Route path="/" element={<HomePages />} />
             <Route path="/listreport" element={<ListPages />} />
             <Route path="/laporan/detail/:id" element={<DetailPages />} />
-            <Route path="/about" element={<AboutPages />} />
+            <Route path="/tentangkami" element={<AboutPages />} />
+            <Route path="/resetPassword" element={<ResetPassword />} />
 
             <Route path="/masuk" element={<LoginPage />} />
             <Route path="/daftar" element={<RegisterPage />} />
@@ -56,7 +59,7 @@ function App() {
           </Routes>
         </main>
         {/* <Footer /> */}
-        {isLoginPage || isRegisterPage ? null : <Footer />}
+        {isLoginPage || isRegisterPage || isResetPage ? null : <Footer />}
       </div>
     </Provider>
   );

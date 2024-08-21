@@ -52,7 +52,6 @@ export default function UserReports() {
           getData.data.data &&
           getData.data.data.map((i) => {
             const date = i.createdAt.slice(0, 10);
-            // console.log(i.createdAt);
             return (
               <Card
                 key={i.id}

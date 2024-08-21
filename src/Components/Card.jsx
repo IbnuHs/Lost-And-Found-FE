@@ -40,7 +40,7 @@ export default function Card(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  
   const postData = async () => {
     try {
       // console.log(id);
@@ -137,8 +137,8 @@ export default function Card(props) {
             <h1 className="text-[18px]">{props.nameItem}</h1>
           </a>
           <p className="text-[13px] text-[#545458]">{props.date}</p>
-          {role === "Admin" ||
-            (decode.userId && props.userId === decode.userId && (
+          {((decode.userId && props.userId === decode.userId) ||
+            (decode.role && decode.role === "Admin")) && (
               <div className="absolute -right-3 top-2">
                 <IconButton
                   aria-label="more"
@@ -169,7 +169,7 @@ export default function Card(props) {
                   <MenuItem onClick={handlePrompt}>Delete</MenuItem>
                 </Menu>
               </div>
-            ))}
+            )}
         </div>
         <div className="">
           <div className="flex flex-col gap-1">
