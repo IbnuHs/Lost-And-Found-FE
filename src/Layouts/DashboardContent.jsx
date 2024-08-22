@@ -24,21 +24,21 @@ export default function DashboardContent() {
           <img src={report} alt="" className="w-8" />
           <div className="flex flex-col justify-center">
             <h1 className="text-[12px] font-semibold">Total Laporan</h1>
-            <h1 className="text-[20px] font-semibold">{data.data && data.data.all.length}</h1>
+            <h1 className="text-[20px] font-semibold">{data.data && data.data.all && data.data.all.length}</h1>
           </div>
         </div>
         <div className="flex items-center border-2 rounded-lg border-[#C5C5C5] px-2 py-2 min-w-[250px] gap-2">
           <img src={chekclist} alt="" className="w-9" />
           <div className="flex flex-col justify-center ">
             <h1 className="text-[12px] font-semibold">Laporan DiTerima</h1>
-            <h1 className="text-[20px] font-semibold">{data.data && data.data.approve.length}</h1>
+            <h1 className="text-[20px] font-semibold">{data.data && data.data.approve && data.data.approve.length}</h1>
           </div>
         </div>
         <div className="flex items-center border-2 rounded-lg border-[#C5C5C5] px-2 py-2 min-w-[250px] gap-2">
           <img src={user} alt="" className="w-9" />
           <div className="flex flex-col justify-center">
             <h1 className="text-[12px] font-semibold">Laporan Selesai</h1>
-            <h1 className="text-[20px] font-semibold">{data.data && data.data.complete.length}</h1>
+            <h1 className="text-[20px] font-semibold">{data.data && data.data.complete && data.data.complete.length}</h1>
           </div>
         </div>
       </div>
