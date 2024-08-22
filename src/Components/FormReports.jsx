@@ -106,7 +106,7 @@ export default function FormReports({ setShowForm, showform, funcOnShow }) {
     <div
       className={`${
         showform ? "hidden" : "inline-block"
-      } fixed left-0 min-h-[400px] right-0 top-0 bottom-0 z-50 px-4 backdrop-blur flex items-center `}
+      } fixed left-0 min-h-[400px] right-0 top-0 bottom-0 z-50 px-4 backdrop-blur flex items-center  overflow-auto`}
     >
       <div className="flex border-2 border-black max-w-[750px] bg-white m-auto font-source-sans3 rounded-xl overflow-hidden">
         <div className="hidden md:flex max-w-[45%] bg-[#8C8C8C] px-6 flex-col py-24">
