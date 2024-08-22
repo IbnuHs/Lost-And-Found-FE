@@ -1,6 +1,5 @@
 import React from "react";
-import { EllipsisVertical } from "lucide-react";
-import pict from "../assets/Picture.jpg";
+import { EllipsisVertical, Trash2 } from "lucide-react";
 import { api } from "../lib/API";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
@@ -51,14 +50,68 @@ export default function CardsAdmin(props) {
   function getDateOnly(dateTimeString) {
     return new Date(dateTimeString).toISOString().split("T")[0];
   }
+  const deleteReports = useMutation({
+    mutationFn : async ()=>{
+      const res = await api.delete(`/laporan/delete/${props.id}`)
+      return res.data
+    },
+    onMutate: () => {
+      Swal.fire({
+        title: "Menghapus",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["adminReports", "getReports"]);
+      Swal.fire({
+        title: "Laporan Dihapus",
+        text: "Laporan berhasil dihapus",
+        icon: "success",
+      });
+    },
+    onError: (error) => {
+      Swal.fire({
+        title: "Error",
+        text: "Terjadi kesalahan saat menghapus laporan",
+        icon: "error",
+      });
+    },
+  })
+  function onAccept() {
+    mutation.mutate("DI TERIMA");
+  }
+
+  function onReject() {
+    mutation.mutate("DI TOLAK");
+  }
+
+  function onDelete() {
+    Swal.fire({
+      title: "Anda yakin?",
+      text: "Laporan yang dihapus tidak dapat dikembalikan!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Hapus",
+      cancelButtonText: "Batal",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteReports.mutate();
+      }
+    });
+  }
   return (
     <div className="rounded-lg border-2 px-[14px] py-[10px] font-poppins flex flex-col gap-4 xl:px-5 xl:py-4">
       <div className="flex justify-between">
-        <h1 className="bg-lost-color text-white px-3 rounded text-[11px] py-1">
+        <h1 className={`${props.case === "Kehilangan" ? "bg-lost-color" : "bg-[#5680ED]"}  text-white px-3 rounded text-[11px] py-1`}>
           {props.case}
         </h1>
-        <button type="button">
-          <EllipsisVertical size={20} />
+        <button type="button" onClick={onDelete}>
+          <Trash2 size={20} />
         </button>
       </div>
       {/* <div className="">

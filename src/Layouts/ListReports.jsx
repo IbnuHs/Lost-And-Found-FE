@@ -9,6 +9,7 @@ import { Box, CircularProgress, Pagination, Stack } from "@mui/material";
 export default function ListReports({ onShow }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [filterDrop, setFilterDrop] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [tempFilter, setTempFilter] = useState({
     jenisLaporan: "",
     Category: "",
@@ -34,7 +35,7 @@ export default function ListReports({ onShow }) {
       // console.log(currentPage);
       return res.data;
     },
-    placeholderData: keepPreviousData,
+    placeholderData: keepPreviousData,    
   });
   useEffect(() => {
     // console.log(currentPage);
@@ -245,9 +246,9 @@ export default function ListReports({ onShow }) {
           </div>
           <hr className="h-1 bg-[#5C5F62] m-auto mt-1" />
         </div>
-        <div className="grid min-h-[200px] grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:min-w-[600px] xl:min-w-[900px] xl:grid-cols-3 gap-4 mt-6 justify-items-center xl:justify-items-start m-auto xl:m-4">
+        <div className="grid min-h-[200px] grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:min-w-[600px] xl:min-w-[900px] xl:grid-cols-3 gap-4 mt-6 justify-items-center xl:justify-items-start m-auto xl:m-4 ">
           {getData.isLoading && (
-            <div className="col-span-1 flex justify-center lg:col-span-2 xl:col-span-3">
+            <div className="col-span-1 flex justify-center lg:col-span-2 xl:col-span-3 min-h-80 items-center xl:min-w-full">
               <Box sx={{ display: "flex" }}>
                 <CircularProgress />
               </Box>
@@ -256,7 +257,7 @@ export default function ListReports({ onShow }) {
           {getData.isSuccess &&
             getData.data.laporan &&
             getData.data.laporan.length === 0 && (
-              <div className="col-span-1 flex justify-center lg:col-span-2 xl:col-span-3 xl:row-span-5 lg:min-h-[400px]">
+              <div className="col-span-1 flex justify-center md:col-span-2   xl:col-span-3 xl:row-span-5 lg:min-h-[400px] ">
                 <h1 className="text-lg font-semibold">Kosong</h1>
               </div>
             )}
@@ -265,7 +266,6 @@ export default function ListReports({ onShow }) {
             getData.data.laporan.length !== 0 &&
             getData.data.laporan.map((i) => {
               const date = i.createdAt.slice(0, 10);
-              // console.log(i);
               return (
                 <Card
                   key={i.id}

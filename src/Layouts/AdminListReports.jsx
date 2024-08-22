@@ -12,13 +12,16 @@ export default function AdminListReports() {
   function dropDown() {
     setFilterDrop(!filterDrop);
   }
+  const [filter, setFilters] = useState({
+    searchTerm: "",
+  });
 
   const { data, isLoading, isSuccess, isError, refetch } = useQuery({
     queryKey: ["adminReports"],
     queryFn: async () => {
       try {
         const res = await api.get("/laporan/allReports", {
-          params: { page: currentPage },
+          params: { page: currentPage, searchTerm: filter.searchTerm  },
         });
         return res.data;
       } catch (error) {
@@ -33,6 +36,14 @@ export default function AdminListReports() {
   }, [currentPage, data]);
   const handlePageChange = async (event, value) => {
     setCurrentPage(value);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setFilters({
+      ...filter,
+      searchTerm: event.target.search.value, // Mengambil nilai dari input search
+    });
+    refetch();
   };
   return (
     <div className="border-2 flex-grow px-4">
@@ -53,8 +64,9 @@ export default function AdminListReports() {
               id=""
               placeholder="Search"
               className="flex-grow py-1 border-none focus:ring-0 focus:outline-none text-black bg-transparent"
+              onChange={(e) => setFilters({ ...filter, searchTerm: e.target.value })}
             />
-            <button className="">
+            <button className="" type="button" onClick={handleSubmit}>
               <SearchIcon />
             </button>
           </div>

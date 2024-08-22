@@ -2,7 +2,7 @@ import React from "react";
 import { NotepadText } from "lucide-react";
 import report from "../assets/Layer 2.svg";
 import chekclist from "../assets/Checklist.svg";
-import user from "../assets/u_users-alt.svg";
+import user from "../assets/agreement_1492549.png";
 import CardsAdmin from "../Components/CardsAdmin";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../lib/API";
@@ -24,21 +24,21 @@ export default function DashboardContent() {
           <img src={report} alt="" className="w-8" />
           <div className="flex flex-col justify-center">
             <h1 className="text-[12px] font-semibold">Total Laporan</h1>
-            <h1 className="text-[20px] font-semibold">29</h1>
+            <h1 className="text-[20px] font-semibold">{data.data.all.length}</h1>
           </div>
         </div>
         <div className="flex items-center border-2 rounded-lg border-[#C5C5C5] px-2 py-2 min-w-[250px] gap-2">
           <img src={chekclist} alt="" className="w-9" />
           <div className="flex flex-col justify-center ">
-            <h1 className="text-[12px] font-semibold">Total Laporan</h1>
-            <h1 className="text-[20px] font-semibold">29</h1>
+            <h1 className="text-[12px] font-semibold">Laporan DiTerima</h1>
+            <h1 className="text-[20px] font-semibold">{data.data.approve.length}</h1>
           </div>
         </div>
         <div className="flex items-center border-2 rounded-lg border-[#C5C5C5] px-2 py-2 min-w-[250px] gap-2">
           <img src={user} alt="" className="w-9" />
           <div className="flex flex-col justify-center">
-            <h1 className="text-[12px] font-semibold">Total Pengguna</h1>
-            <h1 className="text-[20px] font-semibold">29</h1>
+            <h1 className="text-[12px] font-semibold">Laporan Selesai</h1>
+            <h1 className="text-[20px] font-semibold">{data.data.complete.length}</h1>
           </div>
         </div>
       </div>
